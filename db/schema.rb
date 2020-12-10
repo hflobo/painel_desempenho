@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_182859) do
+ActiveRecord::Schema.define(version: 2020_12_10_211018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 2020_12_10_182859) do
   add_foreign_key "affiliateds", "indicators"
   add_foreign_key "affiliateds", "users"
   add_foreign_key "alerts", "indicators"
+  add_foreign_key "alerts", "users", column: "criador_id"
+  add_foreign_key "alerts", "users", column: "destinatario_id"
   add_foreign_key "dashboards", "users"
   add_foreign_key "goals", "indicators"
   add_foreign_key "indicators", "indicators"
