@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   belongs_to :criador, class_name: :alert
   belongs_to :destinatario, class_name: :alert
-  has_many :alerts, :affiliateds, :indicators, :responsibles, :dashboards
+  has_many :alerts
+  has_many :affiliateds
+  has_many :indicators
+  has_many :responsibles
+  has_many :dashboards
   has_many :kpis, through: :dashboard
 end
