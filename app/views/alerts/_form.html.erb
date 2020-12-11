@@ -1,0 +1,17 @@
+<div>
+  <%= simple_form_for(@alert, @indicator) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    
+    <p>Indicador: <% @indicator.nome %></p>
+    <p>Criador: <% @indicator.user.email %></p>
+    <div class="form-inputs">
+      <%= f.input :descricao %>
+      <%= f.input :destinatario %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'Compartilhe', class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+</div>
