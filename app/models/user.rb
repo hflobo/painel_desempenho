@@ -4,12 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :criador, class_name: :alert
-  belongs_to :destinatario, class_name: :alert
-  has_many :alerts
-  has_many :affiliateds
+  # belongs_to :criador, class_name: :alert
+  # belongs_to :destinatario, class_name: :alert
+  has_many :alertas_feitos, class_name: 'Alert', foreign_key: 'criador_id', dependent: :destroy
+  has_many :alertas_recebidos, class_name: 'Alert', foreign_key: 'destinatario_id', dependent: :destroy
+  has_many :affiliateds, dependent: :destroy
   has_many :indicators
-  has_many :responsibles
-  has_many :dashboards
+  has_many :responsibles, dependent: :destroy
+  has_many :dashboards, dependent: :destroy
   has_many :kpis, through: :dashboard
 end

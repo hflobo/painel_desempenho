@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_211018) do
+ActiveRecord::Schema.define(version: 2020_12_11_222149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,15 +61,14 @@ ActiveRecord::Schema.define(version: 2020_12_10_211018) do
     t.string "finalidade"
     t.string "abrangencia"
     t.string "unidade_de_medida"
-    t.integer "periodo_do_indice"
-    t.integer "periodo_da_meta"
+    t.integer "qtd_apuracoes_ano"
+    t.integer "qtd_metas_ano"
     t.bigint "user_id", null: false
     t.bigint "objective_id", null: false
     t.bigint "region_id", null: false
-    t.bigint "indicator_id", null: false
+    t.bigint "pai_indicator_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["indicator_id"], name: "index_indicators_on_indicator_id"
     t.index ["objective_id"], name: "index_indicators_on_objective_id"
     t.index ["region_id"], name: "index_indicators_on_region_id"
     t.index ["user_id"], name: "index_indicators_on_user_id"
@@ -83,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_211018) do
     t.bigint "dashboard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "nome", limit: 50
     t.index ["dashboard_id"], name: "index_kpis_on_dashboard_id"
     t.index ["indicator_id"], name: "index_kpis_on_indicator_id"
   end
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_211018) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "admin"
+    t.string "name", limit: 80
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -140,7 +141,7 @@ ActiveRecord::Schema.define(version: 2020_12_10_211018) do
   add_foreign_key "alerts", "users", column: "destinatario_id"
   add_foreign_key "dashboards", "users"
   add_foreign_key "goals", "indicators"
-  add_foreign_key "indicators", "indicators"
+  add_foreign_key "indicators", "indicators", column: "pai_indicator_id"
   add_foreign_key "indicators", "objectives"
   add_foreign_key "indicators", "regions"
   add_foreign_key "indicators", "users"
