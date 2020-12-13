@@ -10,30 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_222149) do
+ActiveRecord::Schema.define(version: 2020_12_12_234505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "affiliateds", force: :cascade do |t|
-    t.bigint "indicator_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["indicator_id"], name: "index_affiliateds_on_indicator_id"
-    t.index ["user_id"], name: "index_affiliateds_on_user_id"
-  end
-
   create_table "alerts", force: :cascade do |t|
     t.string "descricao"
     t.date "data_ciencia"
-    t.string "providencia"
     t.date "data_providencia"
     t.integer "criador_id"
     t.integer "destinatario_id"
     t.bigint "indicator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "texto_providencia"
+    t.boolean "providencia"
     t.index ["indicator_id"], name: "index_alerts_on_indicator_id"
   end
 
@@ -48,10 +40,21 @@ ActiveRecord::Schema.define(version: 2020_12_11_222149) do
   create_table "goals", force: :cascade do |t|
     t.integer "ano"
     t.integer "periodo"
-    t.integer "valor"
     t.bigint "indicator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "val_jan"
+    t.float "val_fev"
+    t.float "val_mar"
+    t.float "val_abr"
+    t.float "val_mai"
+    t.float "val_jun"
+    t.float "val_jul"
+    t.float "val_ago"
+    t.float "val_set"
+    t.float "val_out"
+    t.float "val_nov"
+    t.float "val_dez"
     t.index ["indicator_id"], name: "index_goals_on_indicator_id"
   end
 
@@ -101,15 +104,6 @@ ActiveRecord::Schema.define(version: 2020_12_11_222149) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "responsibles", force: :cascade do |t|
-    t.bigint "indicator_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["indicator_id"], name: "index_responsibles_on_indicator_id"
-    t.index ["user_id"], name: "index_responsibles_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -118,7 +112,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_222149) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.string "name", limit: 80
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -127,15 +121,24 @@ ActiveRecord::Schema.define(version: 2020_12_11_222149) do
   create_table "values", force: :cascade do |t|
     t.integer "ano"
     t.integer "periodo"
-    t.integer "valor"
     t.bigint "indicator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "val_jan"
+    t.float "val_fev"
+    t.float "val_mar"
+    t.float "val_abr"
+    t.float "val_mai"
+    t.float "val_jun"
+    t.float "val_jul"
+    t.float "val_ago"
+    t.float "val_set"
+    t.float "val_out"
+    t.float "val_nov"
+    t.float "val_dez"
     t.index ["indicator_id"], name: "index_values_on_indicator_id"
   end
 
-  add_foreign_key "affiliateds", "indicators"
-  add_foreign_key "affiliateds", "users"
   add_foreign_key "alerts", "indicators"
   add_foreign_key "alerts", "users", column: "criador_id"
   add_foreign_key "alerts", "users", column: "destinatario_id"
@@ -147,7 +150,5 @@ ActiveRecord::Schema.define(version: 2020_12_11_222149) do
   add_foreign_key "indicators", "users"
   add_foreign_key "kpis", "dashboards"
   add_foreign_key "kpis", "indicators"
-  add_foreign_key "responsibles", "indicators"
-  add_foreign_key "responsibles", "users"
   add_foreign_key "values", "indicators"
 end

@@ -1,2 +1,37 @@
-<h1>Alerts#new</h1>
-<p>Find me in app/views/alerts/new.html.erb</p>
+<div class="container">
+  <br>
+  <h2>Alertas Enviados</h2>
+  <div class='notifications'>
+    <% @alerts.each do |alert| %>
+      <% user = User.find(alert.destinatario_id) %>
+      <div class="notification">
+        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+        <div class="notification-content">
+          <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+          <p>Indicador: <%= alert.indicator.nome %></p>
+          <p><%= alert.descricao %></p>
+          <p>Destinatário: <%= user.name %> - Ciência: <small><%= "#{alert.data_ciencia.strftime('%d.%m.%Y %H:%M')}" %>
+            </small>  -  Providência: <small><%= "#{alert.data_providencia.strftime('%d.%m.%Y %H:%M')}" %>
+            </small></p>
+          <p><%= alert.providencia %></p>
+        </div>
+
+        <div class="notification-actions">
+          <a><%= link_to "Editar", edit_alert_path(alert), class: "a-primary" %><i class="far fa-edit"></i></a>
+          <a><%= link_to 'Apagar', alert, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
+            <i class="far fa-trash-alt"></i></a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="form">
+    <br>
+    <h1>Crie seu alerta:</h1>
+
+    <%= render 'form', alert: (@alert, @indicator)%>
+    <div class="my-4">
+      <%= link_to 'Voltar', alerts_path, class: "a-primary"%>
+    </div>
+  </div>
+</div>

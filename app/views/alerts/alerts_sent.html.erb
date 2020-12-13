@@ -1,13 +1,6 @@
 <div class='container'>
   <br>
-  <div class="form">
-    <h3>Entre com as alterações:</h3>
-    <%= render 'form', alert: (@alert)%>
-    <div class="my-4">
-      <%= link_to 'Voltar', alerts_sent_path, class: "a-primary"%>
-    </div>
-  </div>
-  <h3>Alertas Enviados</h3>
+  <h2>Alertas Enviados</h2>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
       <% user = User.find(alert.destinatario_id) %>

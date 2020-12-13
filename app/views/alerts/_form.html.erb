@@ -1,17 +1,19 @@
 <div>
-  <%= simple_form_for(@alert, @indicator) do |f| %>
+  <%= simple_form_for(@alert) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     
-    <p>Indicador: <% @indicator.nome %></p>
-    <p>Criador: <% @indicator.user.email %></p>
+    <p><strong><%= @indicator.nome %></strong></p>
+    
     <div class="form-inputs">
-      <%= f.input :descricao %>
-      <%= f.input :destinatario %>
+      <%= f.input :descricao, label: 'Alerta:' %>
+      <%= f.input :destinatario_id, label: 'Destinatário:', collection: @users %>
+      <%= f.input :providencia, label: 'Requer providência.' %>
+      
     </div>
 
     <div class="form-actions">
-      <%= f.submit 'Compartilhe', class: "btn btn-outline-secondary" %>
+      <%= f.submit 'Criar', class: "btn btn-outline-secondary" %>
     </div>
   <% end %>
 </div>
