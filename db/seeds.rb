@@ -115,43 +115,13 @@ Objective.all.each do |objective|
   end
 end
 
-# puts "Creating goals..."
-# Indicator.all.each do |indicator|
-#   (2017..2020).to_a.each do |ano|
-#     indicator.qtd_metas_ano.times do |_i|
-#       Goal.create!(ano: ano,
-#                    periodo: i + 1,
-#                    valor: rand,
-#                    indicator_id: indicator.id)
-#     end
-#   end
-# end
-
-# puts "Creating values..."
-# Indicator.all.each do |indicator|
-#   (2017..2020).to_a.each do |ano|
-#     indicator.qtd_apuracoes_ano.times do |i|
-#       Value.create!(ano: ano,
-#                     periodo: i + 1,
-#                     valor: rand,
-#                     indicator_id: indicator.id)
-#     end
-#   end
-# end
-
 puts "Creating goals..."
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
-    if indicator.qtd_metas_ano = 1
+    indicator.qtd_metas_ano.times do |i|
       Goal.create!(ano: ano,
-                   periodo: 12 / indicator.qtd_metas_ano,
-                   val_dez: rand,
-                   indicator_id: indicator.id)
-    else
-      Goal.create!(ano: ano,
-                   periodo: 12 / indicator.qtd_metas_ano,
-                   val_jun: rand,
-                   val_dez: rand,
+                   periodo: i + 1,
+                   valor: rand,
                    indicator_id: indicator.id)
     end
   end
@@ -160,35 +130,10 @@ end
 puts "Creating values..."
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
-    if indicator.qtd_apuracoes_ano = 2
+    indicator.qtd_apuracoes_ano.times do |i|
       Value.create!(ano: ano,
-                    periodo: 12 / indicator.qtd_apuracoes_ano,
-                    val_jun: rand,
-                    val_dez: rand,
-                    indicator_id: indicator.id)
-    elsif indicator.qtd_apuracoes_ano = 4
-      Value.create!(ano: ano,
-                    periodo: 12 / indicator.qtd_apuracoes_ano,
-                    val_mar: rand,
-                    val_jun: rand,
-                    val_set: rand,
-                    val_dez: rand,
-                    indicator_id: indicator.id)
-    else
-      Value.create!(ano: ano,
-                    periodo: 12 / indicator.qtd_apuracoes_ano,
-                    val_jan: rand,
-                    val_fev: rand,
-                    val_mar: rand,
-                    val_abr: rand,
-                    val_mai: rand,
-                    val_jun: rand,
-                    val_jul: rand,
-                    val_ago: rand,
-                    val_set: rand,
-                    val_out: rand,
-                    val_nov: rand,
-                    val_dez: rand,
+                    periodo: i + 1,
+                    valor: rand,
                     indicator_id: indicator.id)
     end
   end
