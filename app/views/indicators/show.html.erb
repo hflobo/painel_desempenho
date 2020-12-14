@@ -1,0 +1,15 @@
+<div class="container w-50">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      <h2><%= @indicator.nome %></h2>
+      <p><%= @indicator.sigla %></p>
+      <p><%= @indicator.finalidade %></p>
+      <div>
+        <%= link_to "Criar alerta", new_alert_url(@alert), class: "btn btn-primary btn-lg btn-block"%></li>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+

@@ -125,7 +125,8 @@ Indicator.all.each do |indicator|
       Goal.create!(ano: ano,
                    periodo: i + 1,
                    valor: rand,
-                   indicator_id: indicator.id)
+                   indicator_id: indicator.id,
+                   maximo: true)
     end
   end
 end
