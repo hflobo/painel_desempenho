@@ -1,0 +1,33 @@
+<div class='container' >
+  <h2>Alertas Enviados</h2>
+  <div class='notifications'>
+    <% @alerts.each do |alert| %>
+      <% user = User.find(alert.destinatario_id) %>
+      <div class="notification">
+        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+        <div class="notification-content">
+          <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+          <p><small><%= alert.indicator.nome %></small></p>
+          <p><%= alert.descricao %></p>
+          <p>Destinatário: <small style="font-color:blue"><%= user.name %></small> - Ciência: <small>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+            </small>  -  Providência: <small>
+            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
+            </small></p>
+          <p><%= alert.texto_providencia %></p>
+        </div>
+
+        <div class="notification-actions">
+          <% if alert.data_ciencia %>
+             <a><%= link_to "Arquivar", alert, method: :file, class: "a-primary" %>
+              <i class="fas fa-archive"></i></a>
+          <% else %>
+            <a><%= link_to "Editar", edit_alert_path(alert), class: "a-primary" %><i class="far fa-edit"></i></a>
+            <a><%= link_to 'Apagar', alert, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
+            <i class="far fa-trash-alt"></i></a>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

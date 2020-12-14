@@ -1,0 +1,19 @@
+<div class="form">
+
+  <%= simple_form_for(@alert) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <p><strong><%= @indicator.nome %></strong></p>
+    <p>Alerta: <strong><%= @alert.descricao %></strong></p>
+    <p>Emitente: <strong><%= @users.find(@alert.criador_id).name %></strong> - Data: <strong>
+      <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %></strong></p>
+    <div class="form-inputs">
+      <br>
+      <%= f.input :texto_providencia, label: 'Providências adotadas' %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "#{@alert.texto_providencia ? 'Alterar' : 'Criar'}", class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>
