@@ -11,4 +11,5 @@ class User < ApplicationRecord
   has_many :indicators
   has_many :dashboards, dependent: :destroy
   has_many :kpis, through: :dashboard
+  has_one_attached :photo
 end
