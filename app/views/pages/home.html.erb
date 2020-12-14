@@ -13,22 +13,22 @@
         <div class="dashboard-card stat">
           <div class="dashboard-card-content" >
             <h3>3,536</h3>
-            <p>Arrecadação</p>
-            <%= pie_chart({"Football" => 10, "Basketball" => 5}) %>
-            
+            <p>Arrecadação - Meta</p>
+            <%= pie_chart ({"Não cumprida" => 25, "Cumprida" => 75}), donut: true, download: true, colors: ["#04576262", "#4e8d7c"] %>
           </div>
         </div>
         <div class="dashboard-card stat">
           <div class="dashboard-card-content">
             <h3>758</h3>
             <p>Fiscalizações</p>
+            <%= line_chart ({"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 }) %>
           </div>
         </div>
         <div class="dashboard-card stat">
           <div class="dashboard-card-content">
             <h3>119</h3>
             <p>Autuações</p>
-           
+            <%= column_chart ({"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 }), colors: ["#04576262", "#4e8d7c"] %>
           </div>
         </div>
         <div class="dashboard-card description">
@@ -37,6 +37,9 @@
             <p class="text-justify">
               Escolha outros indicadores para acompanhar.
             </p>
+            <%= area_chart ({"Jan" => 1.25, "Fev" => 1.35, "Mar" => 1.40,"Abr" => 1.20,"Mai" => 1.39, "Jun" => 1.40,
+                             "Jul" => 1.10, "Ago" => 1.20, "Set" => 1.03,"Out" => 1.25,"Nov" => 1.30, "Dez" => 1.18 }
+                            ), width: "800px" %>
           </div>
         </div>
       </div>
