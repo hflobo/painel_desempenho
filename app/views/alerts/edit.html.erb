@@ -1,33 +1,70 @@
 <div class='container'>
-  <div class="form">
-    <h3>Entre com as alterações</h3>
-    <%= render 'form', alert: (@alert)%>
-    <div class="my-4">
-      <%= link_to 'Voltar', alerts_sent_path, class: "a-primary"%>
-    </div>
-  </div>
-  <h3>Alertas Enviados</h3>
-  <div class='notifications'>
-    <% @alerts.each do |alert| %>
-      <% user = User.find(alert.destinatario_id) %>
-      <div class="notification">
-        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
-        <div class="notification-content">
-          <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
-          <p><small><%= alert.indicator.nome %></small></p>
-          <p><%= alert.descricao %></p>
-          <p>Destinatário: <small style="font-color:blue"><%= user.name %></small> - Ciência: <small><%= "#{alert.data_ciencia.strftime('%d.%m.%Y %H:%M')}" %>
-            </small>  -  Providência: <small><%= "#{alert.data_providencia.strftime('%d.%m.%Y %H:%M')}" %>
-            </small></p>
-          <p><%= alert.texto_providencia %></p>
-        </div>
-
-        <div class="notification-actions">
-          <a><%= link_to "Editar", edit_alert_path(alert), class: "a-primary" %><i class="far fa-edit"></i></a>
-          <a><%= link_to 'Apagar', alert, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
-            <i class="far fa-trash-alt"></i></a>
-        </div>
+  <% if User.find(@alert.criador_id) == current_user%>
+    <div class="form">
+      <h3>Entre com as alterações</h3>
+      <%= render 'form', alert: (@alert)%>
+      <div class="my-4">
+        <%= link_to 'Voltar', alerts_sent_path, class: "a-primary"%>
       </div>
-    <% end %>
-  </div>
+    </div>
+    <h3>Alertas Enviados</h3>
+    <div class='notifications'>
+      <% @alerts.each do |alert| %>
+        <% user = User.find(alert.destinatario_id) %>
+        <div class="notification">
+          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+          <div class="notification-content">
+            <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+            <p><small><%= alert.indicator.nome %></small></p>
+            <p><%= alert.descricao %></p>
+            <p>Destinatário: <small><%= user.name %></small> - Ciência: <small>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+              </small>  -  Providências: <small>
+              <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
+              </small></p>
+            <p><%= alert.texto_providencia %></p>
+          </div>
+
+          <div class="notification-actions">
+            <a><%= link_to "Editar", edit_alert_path(alert), class: "a-primary" %><i class="far fa-edit"></i></a>
+            <a><%= link_to 'Apagar', alert, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
+              <i class="far fa-trash-alt"></i></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="form">
+      <h3>Informe as providências</h3>
+      <%= render 'formp', alert: (@alert)%>
+      <div class="my-4">
+        <%= link_to 'Voltar', alerts_received_path, class: "a-primary"%>
+      </div>
+    </div>
+    <h3>Alertas Recebidos</h3>
+    <div class='notifications'>
+      <% @alerts.each do |alert| %>
+        <div class="notification">
+          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+          <div class="notification-content">
+            <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+            <p><small><%= alert.indicator.nome %></small></p>
+            <p><%= alert.descricao %></p>
+            <p>Ciência: <small><%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+              </small>  -  Providência: <small>
+              <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
+              </small></p>
+            <p><%= alert.texto_providencia %></p>
+          </div>
+
+          <div class="notification-actions">
+            <a><%= link_to "Confirmar", alert, method: :confirm, class: "a-primary" %>
+              <i class="fas fa-business-time"></i></a>
+            <a><%= link_to 'Providências', edit_alert_path(alert), class: "a-primary" %>
+              <i class="far fa-lightbulb"></i></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

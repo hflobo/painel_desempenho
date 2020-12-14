@@ -2,18 +2,21 @@
   <%= simple_form_for(@alert) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    
-    <p><strong><%= @indicator.nome %></strong></p>
-    
+    <% if @indicator %>
+      <p><strong><%= @indicator.nome %></strong></p>
+      <% @alert.indicator = @indicator %>
+    <% end %>
     <div class="form-inputs">
-      <%= f.input :descricao, label: 'Alerta:' %>
-      <%= f.input :destinatario_id, label: 'Destinatário:', collection: @users %>
+      <% if !@indicator %>
+        <% # f.input :indicator_id, label: "Indicador", label_method: :nome, value_method: :id, collection: @indicators.select(:nome).distinct %>
+        <%= f.input :indicator_id, label: "Indicador", label_method: :nome, value_method: :id, collection: @indicators %>
+      <% end %>
+      <%= f.input :descricao, label: 'Alerta' %>
+      <%= f.input :destinatario_id, label: 'Destinatário', collection: @users %>
       <%= f.input :providencia, label: 'Requer providência.' %>
-      
     </div>
-
     <div class="form-actions">
-      <%= f.submit 'Criar', class: "btn btn-outline-secondary" %>
+      <%= f.submit "#{@alert.id ? 'Alterar' : 'Criar'}", class: "btn btn-success" %>
     </div>
   <% end %>
 </div>

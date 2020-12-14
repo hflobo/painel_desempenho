@@ -167,10 +167,11 @@ User.where(admin: true).each do |user|
     Alert.create!(descricao: Faker::ChuckNorris.fact,
                   data_ciencia: data,
                   providencia: true,
+                  arquivado: false,
                   texto_providencia: Faker::ChuckNorris.fact,
                   data_providencia: data + rand(0..60),
                   criador_id: user.id,
-                  destinatario_id: User.all.sample.id,
+                  destinatario_id: User.where("id <> #{user.id}").sample.id,
                   indicator_id: Indicator.all.sample.id)
   end
 end

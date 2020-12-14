@@ -1,6 +1,14 @@
 <div class="container">
-  <br>
-  <h2>Alertas Enviados</h2>
+  <div class="form">
+    <h3>Crie seu alerta:</h3>
+
+    <%= render 'form', alert: (@alert)%>
+    <div class="my-4">
+      <%= link_to 'Voltar', root_path, class: "a-primary"%>
+    </div>
+  </div>
+
+  <h3>Alertas Enviados</h3>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
       <% user = User.find(alert.destinatario_id) %>
@@ -8,12 +16,14 @@
         <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
         <div class="notification-content">
           <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
-          <p>Indicador: <%= alert.indicator.nome %></p>
+          <p><small><%= alert.indicator.nome %></small></p>
           <p><%= alert.descricao %></p>
-          <p>Destinatário: <%= user.name %> - Ciência: <small><%= "#{alert.data_ciencia.strftime('%d.%m.%Y %H:%M')}" %>
-            </small>  -  Providência: <small><%= "#{alert.data_providencia.strftime('%d.%m.%Y %H:%M')}" %>
+          <p>Destinatário: <small style="font-color:blue"><%= user.name %></small> - Ciência: <small>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+            </small>  -  Providência: <small>
+            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
             </small></p>
-          <p><%= alert.providencia %></p>
+          <p><%= alert.texto_providencia %></p>
         </div>
 
         <div class="notification-actions">
@@ -25,13 +35,4 @@
     <% end %>
   </div>
   
-  <div class="form">
-    <br>
-    <h1>Crie seu alerta:</h1>
-
-    <%= render 'form', alert: (@alert, @indicator)%>
-    <div class="my-4">
-      <%= link_to 'Voltar', alerts_path, class: "a-primary"%>
-    </div>
-  </div>
 </div>

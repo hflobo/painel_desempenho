@@ -17,6 +17,14 @@ class AlertPolicy < ApplicationPolicy
     true
   end
 
+  def alerts_received?
+    true
+  end
+
+  def alerts_filed?
+    true
+  end
+
   def destroy?
     record.criador == user
   end

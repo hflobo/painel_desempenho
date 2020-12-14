@@ -8,9 +8,7 @@ class User < ApplicationRecord
   # belongs_to :destinatario, class_name: :alert
   has_many :alertas_feitos, class_name: 'Alert', foreign_key: 'criador_id', dependent: :destroy
   has_many :alertas_recebidos, class_name: 'Alert', foreign_key: 'destinatario_id', dependent: :destroy
-  has_many :affiliateds, dependent: :destroy
   has_many :indicators
-  has_many :responsibles, dependent: :destroy
   has_many :dashboards, dependent: :destroy
   has_many :kpis, through: :dashboard
 end

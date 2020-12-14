@@ -1,5 +1,5 @@
 <div class='container' >
-  <h2>Alertas Enviados</h2>
+  <h2>Alertas Arquivados</h2>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
       <% user = User.find(alert.destinatario_id) %>
@@ -15,17 +15,6 @@
             <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
             </small></p>
           <p><%= alert.texto_providencia %></p>
-        </div>
-
-        <div class="notification-actions">
-          <% if alert.data_ciencia %>
-             <a><%= link_to "Arquivar", alert, method: :file, class: "a-primary" %>
-              <i class="fas fa-archive"></i></a>
-          <% else %>
-            <a><%= link_to "Editar", edit_alert_path(alert), class: "a-primary" %><i class="far fa-edit"></i></a>
-            <a><%= link_to 'Apagar', alert, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
-            <i class="far fa-trash-alt"></i></a>
-          <% end %>
         </div>
       </div>
     <% end %>

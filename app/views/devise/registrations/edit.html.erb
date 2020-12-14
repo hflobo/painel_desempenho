@@ -13,7 +13,8 @@
       <% end %>
       <%= f.input :name, label: 'Nome' %>
       <% if current_user.admin %>
-        <%= f.input :name, label: 'Nome' %>
+        <%= f.input :admin, label: 'Administrador' %>
+      <% end %>
       <%= f.input :password, label: 'Nova senha',
                   hint: "deixe em branco se você não quiser alterá-la",
                   required: false,
