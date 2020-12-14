@@ -53,11 +53,13 @@ User.create!(email: 'marina@email.com',
 
 User.create!(email: 'orelha@email.com',
              name: 'Zé Orelha',
-             password: '123456')
+             password: '123456',
+             admin: false)
 
 User.create!(email: 'outro_orelha@email.com',
              name: 'Mané Orelha',
-             password: '123456')
+             password: '123456',
+             admin: false)
 
 puts 'Creating objectives...'
 Objective.create!(nome: "Reduzir sonegação fiscal",
@@ -99,10 +101,11 @@ Objective.all.each do |objective|
                                 qtd_metas_ano: rand(1..2),
                                 user_id: usr1_id,
                                 objective_id: objective.id,
-                                region_id: Region.first.id)
+                                region_id: Region.first.id,
+                                pai_indicator_id: nil)
   [0, 5].sample.times do |i|
-    Indicator.create!(nome: "Índice de #{objective.nome}",
-                      sigla: "i#{objective.nome.split.map(&:first).join}",
+    Indicator.create!(nome: "Índice de #{objective.nome} #{i + 1}",
+                      sigla: "i#{objective.nome.split.map(&:first).join}#{i + 1}",
                       finalidade: "indicar percentual de #{objective.nome}",
                       abrangencia: "regional",
                       unidade_de_medida: "%",
