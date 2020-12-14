@@ -1,37 +1,45 @@
 class IndicatorsController < ApplicationController
 
-
+  before_action :authenticate_user!
+  
 
   def index
-    @indicators = Indicator.all
+    @indicators = policy_scope(Indicator)
   end
 
   def show
     @indicator = Indicator.find(params[:id])
+    authorize @indicator
   end
 
   def new
     @indicator = Indicator.new
+    authorize @indicator
   end
 
   def create
     @indicator = Indicator.new(indicator_params)
+    authorize @indicator
     @indicator.save
     redirect_to indicator_path(@indicator)
+    
   end
 
   def edit
     @indicator = Indicator.find(params[:id])
+    authorize @indicator
   end
 
   def update
     @indicator = Indicator.find(params[:id])
+    authorize @indicator
     @indicator.update(indicator_params)
     redirect_to indicator_path(@indicator)
   end
 
   def destroy
     @indicator = Indicator.find(params[:id])
+    authorize @indicator
     @indicator.destroy
     redirect_to indicator_path
   end
