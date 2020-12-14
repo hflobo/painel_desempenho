@@ -14,9 +14,9 @@
         <li class="nav-item dropdown">
           <%= link_to "Painel", root_path, class: "nav-link" %>
         </li>
+
         <li class="nav-item dropdown">
-           
-         <%#= image_tag ("campainha.png"), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                
             
             <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alertas</span>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -26,8 +26,18 @@
           <%= link_to "Alertas Arquivados", alerts_filed_path, class: "dropdown-item" %>
         </div>
         </li>
+      
+          <li class="nav-item dropdown">
+                              
+            <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Indicadores</span>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <%= link_to "Indicadores", indicators_index_path, class: "nav-link" %>
+        
+          <%= link_to "Cadastrar indicadores", new_indicator_path, class: "nav-link" %>
+        </div>
+        </li>
+       
 
-        <br>
         <li class="nav-item dropdown">
           <% if current_user.photo.attached? %>
             <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>

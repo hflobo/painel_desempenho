@@ -1,0 +1,10 @@
+<%= simple_form_for(indicator) do |f| %>
+  <%= f.input :nome %>
+  <%= f.input :sigla %>
+  <%= f.input :finalidade %>
+  <%= f.input :abrangencia %>
+  <%= f.input :unidade_de_medida %>
+  <%= f.input :qtd_apuracoes_ano %>
+  <%= f.input :qtd_metas_ano %>
+  <%= f.submit class: "btn btn-success"%>
+<% end %>

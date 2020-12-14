@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_13_230627) do
+ActiveRecord::Schema.define(version: 2020_12_14_150630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_12_13_230627) do
     t.bigint "indicator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "maximo"
     t.index ["indicator_id"], name: "index_goals_on_indicator_id"
   end
 
