@@ -1,0 +1,30 @@
+<div class='container' >
+  <h3>Alertas Recebidos</h3>
+  <div class='notifications'>
+    <% @alerts.each do |alert| %>
+      <div class="notification">
+        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+        <div class="notification-content">
+          <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+          <p><small><%= alert.indicator.nome %></small></p>
+          <p><%= alert.descricao %></p>
+          <p>Ciência: <small>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+            </small>  -  Providência: <small>
+            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
+            </small></p>
+          <p><%= alert.texto_providencia %></p>
+        </div>
+
+        <div class="notification-actions">
+          <% if !alert.data_ciencia %>
+            <a><%= link_to "Confirmar", alert, method: :confirm, class: "a-primary" %>
+              <i class="fas fa-business-time"></i></a>
+          <% end %>
+          <a><%= link_to 'Providências', edit_alert_path(alert), class: "a-primary" %>
+            <i class="far fa-lightbulb"></i></a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
