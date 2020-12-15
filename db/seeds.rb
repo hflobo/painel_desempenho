@@ -92,29 +92,34 @@ Region.create!(nome: "Norte")
 puts "Creating indicators..."
 usr1_id = User.first.id
 Objective.all.each do |objective|
+  tipo_meta_max = [:true, :true, :true, :false].sample
   indicator = Indicator.create!(nome: "Índice de #{objective.nome}",
                                 sigla: "i#{objective.nome.split.map(&:first).join}",
                                 finalidade: "indicar percentual de #{objective.nome}",
                                 abrangencia: "nacional",
-                                unidade_de_medida: :null,
+                                unidade_de_medida: [nil,'%'].sample,
                                 qtd_apuracoes_ano: [2, 4, 12].sample,
                                 qtd_metas_ano: rand(1..2),
                                 user_id: usr1_id,
                                 objective_id: objective.id,
                                 region_id: Region.first.id,
-                                pai_indicator_id: nil)
-  [0, 5].sample.times do |i|
-    Indicator.create!(nome: "Índice de #{objective.nome} #{i + 1}",
-                      sigla: "i#{objective.nome.split.map(&:first).join}#{i + 1}",
-                      finalidade: "indicar percentual de #{objective.nome}",
-                      abrangencia: "regional",
-                      unidade_de_medida: "%",
-                      qtd_apuracoes_ano: [2, 4, 12].sample,
-                      qtd_metas_ano: rand(1..2),
-                      user_id: usr1_id,
-                      objective_id: objective.id,
-                      region_id: (Region.first.id + i + 1),
-                      pai_indicator_id: indicator.id)
+                                pai_indicator_id: nil,
+                                tipo_meta_max: tipo_meta_max)
+  if :true == [:true, :false].sample
+    5.times do |i|
+      Indicator.create!(nome: "Índice de #{objective.nome}",
+                        sigla: "i#{objective.nome.split.map(&:first).join}",
+                        finalidade: "indicar percentual de #{objective.nome}",
+                        abrangencia: "regional",
+                        unidade_de_medida: indicator.unidade_de_medida,
+                        qtd_apuracoes_ano: [2, 4, 12].sample,
+                        qtd_metas_ano: rand(1..2),
+                        user_id: usr1_id,
+                        objective_id: objective.id,
+                        region_id: (Region.first.id + i + 1),
+                        pai_indicator_id: indicator.id,
+                        tipo_meta_max: tipo_meta_max)
+    end
   end
 end
 
@@ -125,8 +130,7 @@ Indicator.all.each do |indicator|
       Goal.create!(ano: ano,
                    periodo: i + 1,
                    valor: rand,
-                   indicator_id: indicator.id,
-                   maximo: true)
+                   indicator_id: indicator.id)
     end
   end
 end
