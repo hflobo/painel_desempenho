@@ -5,11 +5,9 @@
       <p><%= @indicator.sigla %></p>
       <p><%= @indicator.finalidade %></p>
       <div>
-        <%= link_to "Criar alerta", new_alert_url(@alert), class: "btn btn-primary btn-lg btn-block"%></li>
+        <%= link_to "Criar alerta", new_alert_path(id: @indicator), class: "btn btn-primary"%></li>
       </div>
     </div>
   </div>
 </div>
 <hr>
-
-

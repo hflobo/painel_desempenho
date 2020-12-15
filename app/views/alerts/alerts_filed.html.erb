@@ -2,14 +2,17 @@
   <h2>Alertas Arquivados</h2>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
-      <% user = User.find(alert.destinatario_id) %>
       <div class="notification">
-        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
+        <% if alert.destinatario.photo.attached? %>
+            <%= cl_image_tag alert.destinatario.photo.key, class: "avatar-large" %>
+        <% else %>
+            <%= image_tag "user.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <% end %>
         <div class="notification-content">
           <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
           <p><small><%= alert.indicator.nome %></small></p>
           <p><%= alert.descricao %></p>
-          <p>Destinatário: <small style="font-color:blue"><%= user.name %></small> - Ciência: <small>
+          <p>Destinatário: <small style="font-color:blue"><%= alert.destinatario.name %></small> - Ciência: <small>
             <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
             </small>  -  Providência: <small>
             <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
