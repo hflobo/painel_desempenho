@@ -13,7 +13,8 @@ class Indicator < ApplicationRecord
   has_many :indicadores_filhos, class_name: 'Indicator', foreign_key: 'pai_indicator_id', dependent: :nullify
 
   validates :nome, :sigla, :finalidade, :qtd_apuracoes_ano, :qtd_metas_ano, presence: true
-  validates :nome, :sigla, uniqueness: true
+  validates :nome, :sigla, uniqueness: { scope: :region_id,
+    message: "Nome e sigla do indicador devem ser únicos para cada região." }
   validates :pai_indicator_id, exclusion: { in: ->(indicator) { [indicator.id.nil? ? '' : indicator.id] },
       message: "Um indicador não pode ser filho de si mesmo." } # , on: :update
   validates :qtd_apuracoes_ano, :qtd_metas_ano, numericality: { greater_than: 0, only_integer: true }
