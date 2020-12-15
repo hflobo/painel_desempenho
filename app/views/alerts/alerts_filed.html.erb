@@ -2,7 +2,7 @@
   <h2>Alertas Arquivados</h2>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
-      <div class="notification">
+      <div class="notification <%= cookies[:theme] %>">
         <% if alert.destinatario.photo.attached? %>
             <%= cl_image_tag alert.destinatario.photo.key, class: "avatar-large" %>
         <% else %>
