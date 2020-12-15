@@ -1,12 +1,25 @@
-<div class="container w-50">
-  <div class="row justify-content-md-center">
-    <div class="col">
-      <h2><%= @indicator.nome %></h2>
-      <p><%= @indicator.sigla %></p>
-      <p><%= @indicator.finalidade %></p>
-      <div>
-        <%= link_to "Criar alerta", new_alert_path(id: @indicator), class: "btn btn-primary"%></li>
-      </div>
+<div class='container w-50'>
+  <div class='notifications'>
+        <h2><%= @indicator.nome %></h2>
+    <div class="notification">
+        <div class="notification-content">
+          <p>Sigla: <small><%= @indicator.sigla %></small></p>
+          <p>Finalidade: <small><%= @indicator.finalidade %></small></p>
+          <p>Abrangência: <small><%= @indicator.abrangencia %></small></p>
+          <p>Unidade de medida: <small><%= @indicator.unidade_de_medida %></small></p>
+          <p>Quantidade de apurações por ano: <small><%= @indicator.qtd_apuracoes_ano %></small></p>
+          <p>Quantidade de metas por ano: <small><%= @indicator.qtd_metas_ano %></small></p>
+          <p>Região: <small><%= @indicator.region.nome %></small></p>
+        </div>
+        <div class="notification-actions">
+            <a><%= link_to "Editar indicador", edit_indicator_path(@indicator), class: "a-primary" %>
+            <i class="fas fa-chart-bar"></i></a>
+
+            <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
+            <i class="fas fa-bell"></i></a>          
+        </div>
+          
+          
     </div>
   </div>
 </div>
