@@ -1,22 +1,35 @@
 <div class="container w-50">
-  <h3>Indicadores</h3>
-  <ul>
-    <% @indicators.each do |indicator| %>
-      <div class="row justify-content-md-center">
-        <div class="col">
-          <% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
-          <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
-          <%= name %>
-          <% indicator.objective.nome %>
-        </div>
-        <div class="col-md-auto">
-          <%= link_to "Ver indicador", indicator_path(indicator.id), class: "btn btn-primary"%> 
-        </div>
-        <div class="col col-lg-2">
-          <%= link_to "Criar alerta", new_alert_path(@alert), class: "btn btn-primary"%></li>
-        </div>
+  <h1 class="text-center">Indicadores</h3>
+
+    <div class='notifications'>
+      <% @indicators.each do |indicator| %>
+      <div class="notification">
+       
+          <div class="notification-content">
+            <% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
+            <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
+            <small><%= name %></small>
+            <% indicator.objective.nome %>
+            <br>
+            <%= indicator.finalidade %>
+            <br>
+            <%= indicator.abrangencia %>
+          </div>
+
+
+          <div class="notification-actions">
+            <a><%= link_to "Ver indicador", indicator_path(indicator), class: "a-primary" %>
+            <i class="fas fa-chart-bar"></i></a>
+
+            <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
+            <i class="fas fa-bell"></i></a>          
+          </div>
+
+       
+        
       </div>
-      <hr>
     <% end %>
-  </ul>
+
+    </div>
+
 </div>

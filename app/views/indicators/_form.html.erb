@@ -1,10 +1,13 @@
-<%= simple_form_for(indicator) do |f| %>
+<%= simple_form_for(@indicator) do |f| %>
   <%= f.input :nome %>
   <%= f.input :sigla %>
   <%= f.input :finalidade %>
   <%= f.input :abrangencia %>
   <%= f.input :unidade_de_medida %>
+  <%= f.input :region_id, label_method: :nome, collection: @regions %>
+  <%= f.input :objective_id, label_method: :nome, collection: @objectives %>
   <%= f.input :qtd_apuracoes_ano %>
   <%= f.input :qtd_metas_ano %>
-  <%= f.submit class: "btn btn-success"%>
+  <%= f.submit "#{@indicator.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
+
 <% end %>
