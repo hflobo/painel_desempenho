@@ -28,13 +28,4 @@ class ApplicationController < ActionController::Base
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
-
-  # def data_grafico(indicador, opcao, ano_inicio, ano_final, mes_inicio, mes_final, percent)
-  #   valObj = {}
-  #   if opcao = 1
-  #     (ano_inicio..ano_final).to_a.each do |ano|
-  #     @values = Value.where('indicator_id = ? AND ')
-
-  # end
-  # 'criador_id = ? AND arquivado = ?'current_user.id, false
 end
