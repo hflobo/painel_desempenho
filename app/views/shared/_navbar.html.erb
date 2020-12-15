@@ -17,7 +17,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
+      <div class="container">
+        <% if cookies[:theme] == "light" %>
+          <%= link_to "Modo escuro", root_path(theme: "dark") %>
+        <% else %>
+          <%= link_to "Modo claro", root_path(theme: "light") %>
+        <% end %>
+      </div>
+        <% if user_signed_in? %>
         
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboards</span>
