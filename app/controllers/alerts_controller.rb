@@ -9,8 +9,11 @@ class AlertsController < ApplicationController
   end
 
   def new
+    @indicator = Indicator.find(params[:id]) unless params[:id].nil?
+
     @alert = Alert.new
-    @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false)
+    @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
+
     @indicators = Indicator.all
     @users = User.where("id <> #{current_user.id}")
 
@@ -24,7 +27,7 @@ class AlertsController < ApplicationController
     if @alert.save
       redirect_to alerts_sent_path, notice: 'Alerta criado com sucesso.'
     else
-      @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false)
+      @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
       @indicators = Indicator.all
       @users = User.where("id <> #{current_user.id}")
       render :new
@@ -65,17 +68,17 @@ class AlertsController < ApplicationController
   end
 
   def alerts_sent
-    @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false)
+    @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
     authorize @alerts
   end
 
   def alerts_received
-    @alerts = Alert.where('destinatario_id = ? AND arquivado = ?', current_user.id, false)
+    @alerts = Alert.where('destinatario_id = ? AND arquivado = ?', current_user.id, false).includes(:criador)
     authorize @alerts
   end
 
   def alerts_filed
-    @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, true)
+    @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, true).includes(:destinatario)
     authorize @alerts
   end
 
@@ -85,9 +88,9 @@ class AlertsController < ApplicationController
     @alert = Alert.find(params[:id])
     @indicator = Indicator.find(@alert.indicator_id)
     if User.find(@alert.criador_id) == current_user
-      @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false)
+      @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
     else
-      @alerts = Alert.where('destinatario_id = ? AND arquivado = ?', current_user.id, false)
+      @alerts = Alert.where('destinatario_id = ? AND arquivado = ?', current_user.id, false).includes(:criador)
     end
     @users = User.where("id <> #{current_user.id}")
     authorize @alert

@@ -1,15 +1,19 @@
 <div class="container w-50">
+  <h3>Indicadores</h3>
   <ul>
     <% @indicators.each do |indicator| %>
       <div class="row justify-content-md-center">
         <div class="col">
-          <li><%= indicator.nome %>
+          <% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
+          <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
+          <%= name %>
+          <% indicator.objective.nome %>
         </div>
         <div class="col-md-auto">
           <%= link_to "Ver indicador", indicator_path(indicator.id), class: "btn btn-primary"%> 
         </div>
         <div class="col col-lg-2">
-          <%= link_to "Criar alerta", new_alert_url(@alert), class: "btn btn-primary"%></li>
+          <%= link_to "Criar alerta", new_alert_path(@alert), class: "btn btn-primary"%></li>
         </div>
       </div>
       <hr>

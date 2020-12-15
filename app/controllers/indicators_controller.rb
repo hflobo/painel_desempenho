@@ -1,10 +1,8 @@
 class IndicatorsController < ApplicationController
-
   before_action :authenticate_user!
-  
 
   def index
-    @indicators = policy_scope(Indicator)
+    @indicators = policy_scope(Indicator).includes(:region, :objective)
   end
 
   def show
@@ -22,7 +20,6 @@ class IndicatorsController < ApplicationController
     authorize @indicator
     @indicator.save
     redirect_to indicator_path(@indicator)
-    
   end
 
   def edit
@@ -49,5 +46,4 @@ class IndicatorsController < ApplicationController
   def indicator_params
     params.require(:indicator).permit(:nome, :sigla, :finalidade, :abrangencia, :unidade_de_medida, :qtd_apuracoes_ano, :qtd_metas_ano)
   end
-
 end

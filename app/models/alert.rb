@@ -5,3 +5,9 @@ class Alert < ApplicationRecord
 
   validates :descricao, :criador_id, :destinatario_id, presence: true
 end
+
+def name_of_method
+  name = "#{nome} - #{abrangencia}"
+  name = name + ": " + Region.find(region_id).nome if abrangencia.upcase! == "REGIONAL"
+  return name
+end
