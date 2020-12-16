@@ -4,7 +4,7 @@
       <h3>Entre com as alterações</h3>
       <%= render 'form', alert: (@alert)%>
       <div class="my-4">
-        <%= link_to 'Voltar', alerts_sent_path, class: "a-primary"%>
+        <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
       </div>
     </div>
     <h3>Alertas Enviados</h3>
@@ -35,7 +35,7 @@
       <h3>Informe as providências</h3>
       <%= render 'formp', alert: (@alert)%>
       <div class="my-4">
-        <%= link_to 'Voltar', alerts_received_path, class: "a-primary"%>
+        <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
       </div>
     </div>
     <h3>Alertas Recebidos</h3>

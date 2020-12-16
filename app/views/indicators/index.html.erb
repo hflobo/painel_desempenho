@@ -1,35 +1,28 @@
 <div class="container w-50">
-  <h1 class="text-center">Indicadores</h3>
-
-    <div class='notifications'>
-      <% @indicators.each do |indicator| %>
+  <h1 class="text-center">Indicadores</h1>
+  <div class='notifications'>
+    <% @indicators.each do |indicator| %>
       <div class="notification">
-       
-          <div class="notification-content">
-            <% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
-            <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
-            <small><%= name %></small>
-            <% indicator.objective.nome %>
-            <br>
-            <%= indicator.finalidade %>
-            <br>
-            <%= indicator.abrangencia %>
-          </div>
-
-
-          <div class="notification-actions">
-            <a><%= link_to "Ver indicador", indicator_path(indicator), class: "a-primary" %>
-            <i class="fas fa-chart-bar"></i></a>
-
-            <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
-            <i class="fas fa-bell"></i></a>          
-          </div>
-
-       
-        
+        <div class="notification-content">
+          <% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
+          <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
+          <small><%= name %></small>
+          <% indicator.objective.nome %>
+          <br>
+          <%= indicator.finalidade %>
+          <br>
+          <%= indicator.abrangencia %>
+        </div>
+        <div class="notification-actions">
+          <a><%= link_to "Ver indicador", indicator_path(indicator), class: "a-primary" %>
+          <i class="fas fa-chart-bar"></i></a>
+          <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
+          <i class="fas fa-bell"></i></a>          
+        </div>
       </div>
     <% end %>
-
-    </div>
-
+  </div>
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+  </div>
 </div>
