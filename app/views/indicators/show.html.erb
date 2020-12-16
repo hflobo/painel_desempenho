@@ -23,5 +23,12 @@
   <div class="my-4">
     <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>
+  <div class='container w-300'>
+    <% xarray = param_graph(@indicator, 2, 2018, 2020) %>
+    <%= line_chart (xarray) %>
+    <br>
+    <p font-size=15px><strong>Percentual de Cumprimento da Meta (mês atual):   <%= percent_meta(@indicator).round(2) %>%</strong></p>
+  </div>
+
 </div>
 <hr>

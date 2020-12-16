@@ -24,7 +24,7 @@ end
 # 3) ano_inicio: integer / ano inicial da série
 # 4) ano_final: integer / ano final da série
 
-def param_graph(indicador, opcao = true, ano_inicio, ano_final)
+def param_graph(indicador, opcao = 0, ano_inicio, ano_final)
   valorObj = {}
   metaObj = {}
   mes = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
@@ -36,7 +36,7 @@ def param_graph(indicador, opcao = true, ano_inicio, ano_final)
     (ano_inicio..ano_final).to_a.each do |iano|
       valores = Value.where('ano = ? AND indicator_id = ?', iano, indicador.id)
       valores.each do |value|
-        valorObj["#{mes[value.periodo * xValue]}/#{iano % 2000}"] = value.valor
+        valorObj["#{mes[value.periodo * xValue - 1]}/#{iano % 2000}"] = value.valor
       end
     end
   end
@@ -44,7 +44,7 @@ def param_graph(indicador, opcao = true, ano_inicio, ano_final)
     (ano_inicio..ano_final).to_a.each do |iano|
       metas = Goal.where('ano = ? AND indicator_id = ?', iano, indicador.id)
       metas.each do |goal|
-        metaObj["#{mes[goal.periodo * xGoal]}/#{iano % 2000}"] = goal.valor
+        metaObj["#{mes[goal.periodo * xGoal - 1]}/#{iano % 2000}"] = goal.valor
       end
     end
   end
@@ -59,29 +59,29 @@ def param_graph(indicador, opcao = true, ano_inicio, ano_final)
       case indicador.qtd_metas_ano
       when 1
         (1..11).to_a.each do |i|
-          metasCheia["#{mes[i]}/#{iano % 2000}"] = metaObj["dez/#{iano % 2000}"]
+          metasCheia["#{mes[i - 1]}/#{iano % 2000}"] = metaObj["dez/#{iano % 2000}"]
         end
       when 2
         [1, 7].each do |i|
           (0..4).to_a.each do |j|
-            metasCheia["#{mes[i + j]}/#{iano % 2000}"] = metaObj["#{mes[i + 5]}/#{iano % 2000}"]
+            metasCheia["#{mes[i + j - 1]}/#{iano % 2000}"] = metaObj["#{mes[i + 4]}/#{iano % 2000}"]
           end
         end
       when 3
         [1, 5, 9].each do |i|
           (0..2).to_a.each do |j|
-            metasCheia["#{mes[i + j]}/#{iano % 2000}"] = metaObj["#{mes[i + 3]}/#{iano % 2000}"]
+            metasCheia["#{mes[i + j - 1]}/#{iano % 2000}"] = metaObj["#{mes[i + 2]}/#{iano % 2000}"]
           end
         end
       when 4
         [1, 4, 7, 10].each do |i|
           [0, 1].each do |j|
-            metasCheia["#{mes[i + j]}/#{iano % 2000}"] = metaObj["#{mes[i + 2]}/#{iano % 2000}"]
+            metasCheia["#{mes[i + j - 1]}/#{iano % 2000}"] = metaObj["#{mes[i + 1]}/#{iano % 2000}"]
           end
         end
       when 6
         [1, 3, 5, 7, 9, 11].each do |i|
-          metasCheia["#{mes[i]}/#{iano % 2000}"] = metaObj["#{mes[i + 1]}/#{iano % 2000}"]
+          metasCheia["#{mes[i - 1]}/#{iano % 2000}"] = metaObj["#{mes[i]}/#{iano % 2000}"]
         end
       end
     end
@@ -94,7 +94,7 @@ def param_graph(indicador, opcao = true, ano_inicio, ano_final)
 end
 
 # Calcula o percentual de cumprimento da meta, no ano,
-# até o último valor alimentado
+# até o último valor alimentado e devolve com duas casas decimais
 #
 def percent_meta(indicador)
   metaObj = {}
@@ -105,46 +105,56 @@ def percent_meta(indicador)
 
   metas = Goal.where('ano = ? AND indicator_id = ?', iano, indicador.id)
   metas.each do |goal|
-    metaObj[mes[goal.periodo * xGoal]] = goal.valor
+    metaObj[mes[goal.periodo * xGoal - 1]] = goal.valor
   end
 
   case indicador.qtd_metas_ano
   when 1
     (1..11).to_a.each do |i|
-      metaObj["#{mes[i]}/#{iano % 2000}"] = metaObj["dez/#{iano % 2000}"]
+      metaObj["#{mes[i - 1]}/#{iano % 2000}"] = metaObj["dez/#{iano % 2000}"]
     end
   when 2
     [1, 7].each do |i|
       (0..4).to_a.each do |j|
-        metaObj["#{mes[i + j]}/#{iano % 2000}"] = metaObj["#{mes[i + 5]}/#{iano % 2000}"]
+        metaObj["#{mes[i + j - 1]}/#{iano % 2000}"] = metaObj["#{mes[i + 4]}/#{iano % 2000}"]
       end
     end
   when 3
     [1, 5, 9].each do |i|
       (0..2).to_a.each do |j|
-        metaObj["#{mes[i + j]}/#{iano % 2000}"] = metaObj["#{mes[i + 3]}/#{iano % 2000}"]
+        metaObj["#{mes[i + j - 1]}/#{iano % 2000}"] = metaObj["#{mes[i + 2]}/#{iano % 2000}"]
       end
     end
   when 4
     [1, 4, 7, 10].each do |i|
       [0, 1].each do |j|
-        metaObj["#{mes[i + j]}/#{iano % 2000}"] = metaObj["#{mes[i + 2]}/#{iano % 2000}"]
+        metaObj["#{mes[i + j - 1]}/#{iano % 2000}"] = metaObj["#{mes[i + 1]}/#{iano % 2000}"]
       end
     end
   when 6
     [1, 3, 5, 7, 9, 11].each do |i|
-      metaObj["#{mes[i]}/#{iano % 2000}"] = metaObj["#{mes[i + 1]}/#{iano % 2000}"]
+      metaObj["#{mes[i - 1]}/#{iano % 2000}"] = metaObj["#{mes[i]}/#{iano % 2000}"]
     end
   end
   mesatual = Date.today.month
-  valorperc = 0
+  mesPerc = 0
+  valorPerc = 0
   valores = Value.where('ano = ? AND indicator_id = ?', iano, indicador.id)
+
   valores.each do |value|
     mesind = value.periodo * xValue
-    if mesind <= mesatual
-      valorPerc = valeu.valor
-      mesPerc = mesind
-    end
+
+    next unless mesind <= mesatual
+
+    valorPerc = value.valor
+    mesPerc = mesind
   end
-  return valorPerc / metaObj[mes[mesperc]] * 100
+
+  # retorna o valor do cumprimento de acordo com o tipo da meta
+  #
+  if indicador.tipo_meta_max
+    return (valorPerc / metaObj[mes[mesPerc - 1]] * 100).round(2)
+  else
+    return ((2 - (valorPerc / metaObj[mes[mesPerc - 1]])) * 100).round(2)
+  end
 end

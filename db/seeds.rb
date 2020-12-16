@@ -92,12 +92,12 @@ Region.create!(nome: "Norte")
 puts "Creating indicators..."
 usr1_id = User.first.id
 Objective.all.each do |objective|
-  tipo_meta_max = [:true, :true, :true, :false].sample
+  tipo_meta_max = %i[true true true false].sample
   indicator = Indicator.create!(nome: "Índice de #{objective.nome}",
                                 sigla: "i#{objective.nome.split.map(&:first).join}",
                                 finalidade: "indicar percentual de #{objective.nome}",
                                 abrangencia: "nacional",
-                                unidade_de_medida: [nil,'%'].sample,
+                                unidade_de_medida: [nil, '%'].sample,
                                 qtd_apuracoes_ano: [2, 4, 12].sample,
                                 qtd_metas_ano: rand(1..2),
                                 user_id: usr1_id,
@@ -105,31 +105,33 @@ Objective.all.each do |objective|
                                 region_id: Region.first.id,
                                 pai_indicator_id: nil,
                                 tipo_meta_max: tipo_meta_max)
-  if :true == [:true, :false].sample
-    5.times do |i|
-      Indicator.create!(nome: "Índice de #{objective.nome}",
-                        sigla: "i#{objective.nome.split.map(&:first).join}",
-                        finalidade: "indicar percentual de #{objective.nome}",
-                        abrangencia: "regional",
-                        unidade_de_medida: indicator.unidade_de_medida,
-                        qtd_apuracoes_ano: [2, 4, 12].sample,
-                        qtd_metas_ano: rand(1..2),
-                        user_id: usr1_id,
-                        objective_id: objective.id,
-                        region_id: (Region.first.id + i + 1),
-                        pai_indicator_id: indicator.id,
-                        tipo_meta_max: tipo_meta_max)
-    end
+  next unless :true == %i[true false].sample
+
+  5.times do |i|
+    Indicator.create!(nome: "Índice de #{objective.nome}",
+                      sigla: "i#{objective.nome.split.map(&:first).join}",
+                      finalidade: "indicar percentual de #{objective.nome}",
+                      abrangencia: "regional",
+                      unidade_de_medida: indicator.unidade_de_medida,
+                      qtd_apuracoes_ano: [2, 4, 12].sample,
+                      qtd_metas_ano: rand(1..2),
+                      user_id: usr1_id,
+                      objective_id: objective.id,
+                      region_id: (Region.first.id + i + 1),
+                      pai_indicator_id: indicator.id,
+                      tipo_meta_max: tipo_meta_max)
   end
 end
 
 puts "Creating goals..."
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
+    val = rand(3.5..6.00)
+    puts val
     indicator.qtd_metas_ano.times do |i|
       Goal.create!(ano: ano,
                    periodo: i + 1,
-                   valor: rand,
+                   valor: val,
                    indicator_id: indicator.id)
     end
   end
@@ -141,7 +143,7 @@ Indicator.all.each do |indicator|
     indicator.qtd_apuracoes_ano.times do |i|
       Value.create!(ano: ano,
                     periodo: i + 1,
-                    valor: rand,
+                    valor: rand(3.5..6.0),
                     indicator_id: indicator.id)
     end
   end
