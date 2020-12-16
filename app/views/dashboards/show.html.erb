@@ -1,7 +1,7 @@
 <div class="container">
 
       <div>
-        <h2><%= @dashboard.nome %></h2>
+        <h3><%= @dashboard.nome %></h3>
       </div>
       <div class="dashboard">
         <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>

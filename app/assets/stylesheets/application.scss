@@ -13,10 +13,6 @@
 @import "pages/index";
 @import "components/notification";
 
-body.light {
-  color:rgba(18, 9, 61, 0.746);
-  background-color:#f0eaea;
-}
 body.dark {
   color: white;
   background-color:rgb(52, 58, 64);
@@ -24,28 +20,17 @@ body.dark {
 
 body {
   margin: 0;
-  font-family: 'Nunito sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
-  font-weight: 300;
-  background-color:#e6e0e0;
+  font-weight: 400px;
+  background-color:#f0eaea;
+  line-height: 1.5;
+  color: rgb(131, 143, 156);
  
 }
-p {
-  font-weight: lighter;
-}
+
 h1, h2, h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Nunito sans', sans-serif;
   font-weight: bold;
   
-}
-
-h1 {
-  font-size: 30px;
-}
-h2 {
-  font-size: 25px;
-  margin-bottom: 20px;
-}
-h3 {
-  font-size: 23px;
 }

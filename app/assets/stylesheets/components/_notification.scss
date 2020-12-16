@@ -5,11 +5,16 @@
   background: #fafbfe;
   padding: 8px 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  background-clip: border-box;
+  border-radius: 0.25rem;
+  margin-bottom: 24px;
 }
 
 .notification.dark{
   background-color: rgb(55, 64, 74);
   color: #8391a2!important;
+  background-clip: border-box;
+  border-radius: 0.25rem;
 }
 
 .notification .notification-content {

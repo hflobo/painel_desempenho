@@ -4,6 +4,7 @@
   grid-template-rows: 50% 50%;
   height: calc(100vh - 110px);
   margin-top: 20px;
+  
 }
 .dashboard .main {
   grid-row: 1 / span 2;
@@ -21,6 +22,9 @@
   text-align: center;
   width: 250px;
   height: 400px;
+  background-clip: border-box;
+  border-radius: 0.25rem;
+  margin-bottom: 24px;
 }
 
 .dashboard-card-content {
@@ -41,7 +45,12 @@
 .dashboard-card.dark{
   background: rgb(55, 64, 74);
   color: #8391a2!important;
+  background-clip: border-box;
+  box-shadow: 0 0 35px 0 rgba(49,57,66,.5);
+  margin-bottom: 24px;
+  border: none;
 }
+
 
 .dashboard-card-content.dark{
   background: rgb(55, 64, 74);

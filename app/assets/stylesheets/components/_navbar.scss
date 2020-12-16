@@ -1,7 +1,11 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: #04576262;
-  height: 70px;
+  box-shadow: #02232762 0px 0.125rem 0.25rem !important;
+  padding-left: 30px;
+  padding-right: 50px;
+  font-weight: 400px;
+  line-height: 1.5;
 }
 
 .navbar-lewagon .navbar-collapse {
