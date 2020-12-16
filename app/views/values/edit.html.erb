@@ -1,9 +1,9 @@
-
-
 <div class="container w-50">
-    <h1 class="text-center">Editar o valor</h1>
+    <h1 class="text-center">Editar o valor ID: <%= @value.id %></h1>
     <%= render "form", value: @value %>
-
+        <div class="my-4">
+          <%= link_to "Delete", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
+        </div>
     <div class="container">
   <table class="table">
     <thead>
@@ -23,7 +23,7 @@
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
         <td><%= value.id %></td>
-        <td><a><i class="fas fa-chart-bar"></i></a></td>
+        <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
       </tr>
       <% end %>
     </tbody>
