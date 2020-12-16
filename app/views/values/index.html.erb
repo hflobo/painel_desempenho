@@ -6,7 +6,7 @@
         <th scope="col">Período</th>
         <th scope="col">Valor</th>
         <th scope="col">Indicador</th>
-        <th scope="col">ID</th>
+        <th scope="col">ID do valor</th>
       </tr>
     </thead>
     <tbody>
@@ -17,7 +17,9 @@
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
         <td><%= value.id %></td>
-        <td><a><i class="fas fa-chart-bar"></i></a></td>
+        <td><a><%= link_to "Ver", value_path(value), class: "a-primary" %><i class="fas fa-search-plus"></i></a></td>
+        <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
+        <td><a><%= link_to "Delete #{value.id}", value_path(value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "a-primary" %><i class="fas fa-trash-alt"></i></a></td>
       </tr>
       <% end %>
     </tbody>

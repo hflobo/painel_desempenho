@@ -11,7 +11,9 @@
         </div>
         <div class="notification-actions">
           <a><%= link_to "Editar valor", edit_value_path(@value), class: "a-primary" %>
-                <i class="fas fa-chart-bar"></i></a>
+                <i class="fas fa-edit"></i></a>
+          <a><%= link_to "Delete #{@value.id}", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "a-primary" %><i class="fas fa-trash-alt"></i></a></td>
+
         </div>
       </div>
   </div>

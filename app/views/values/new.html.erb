@@ -21,7 +21,7 @@
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
         <td><%= value.id %></td>
-        <td><a><i class="fas fa-chart-bar"></i></a></td>
+        <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
       </tr>
       <% end %>
     </tbody>
