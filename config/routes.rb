@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   get 'alerts_received', to: 'alerts#alerts_received'
   get 'alerts_filed', to: 'alerts#alerts_filed'
 
+  resources :values
+
   resources :dashboards, only: %i[show new create destroy] do
     resources :kpis, only: %i[show new create destroy]
   end
+
 end
