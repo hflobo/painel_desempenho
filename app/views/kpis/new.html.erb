@@ -1,0 +1,18 @@
+<%= simple_form_for(@kpi) do |f| %>
+  
+
+  <div class="form-inputs">
+    <%= f.input :destaque %>
+    <%= f.input :ordem %>
+    <%= f.input :tipo_grafico %>
+    <%= f.input :indicator_id %>
+    <%= f.input :dashboard_id %>
+    <%= f.input :nome%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+  

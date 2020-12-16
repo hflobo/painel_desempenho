@@ -13,9 +13,13 @@
 
   <body class="<%= cookies[:theme] %>">
  
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-
-    <%= yield %>
+     <div class="d-flex flex-column min-vh-100">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/flashes' %>
+      <article class="flex-grow-1">
+        <%= yield %>
+      </article>
+      <%= render 'shared/footer' %>
+    </div>
   </body>
 </html>
