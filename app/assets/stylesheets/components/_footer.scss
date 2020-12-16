@@ -1,0 +1,37 @@
+.footer {
+  background: #F4F4F4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 65px;
+  padding: 0px 10px;
+  color: rgba(0,0,0,0.3);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+}
+.footer-links a {
+  color: black;
+  opacity: 0.40;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 10px;
+  margin-top: 10px;
+}
+.footer-links a:hover {
+  opacity: 1;
+}
+.footer .fa-chart-bar {
+  padding:10px 10px;
+  font-size: 25px;
+}
+
+.footer.dark{
+  background-color: rgb(55, 64,74);
+  color:gray
+}
+
+.footer-links a.dark{
+  color:gray
+}

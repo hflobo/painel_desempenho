@@ -9,8 +9,8 @@ require("@rails/activestorage").start()
 require("channels")
 
 // Chartkick: biblioteca para geração de gráficos
-require("chartkick")
-require("chart.js")
+// require("chartkick")
+// require("chart.js")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -27,6 +27,9 @@ require("chart.js")
 
 // External imports
 import "bootstrap";
+// Para geração dos gráficos
+import ApexCharts from 'apexcharts'
+window.ApexCharts = ApexCharts
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';

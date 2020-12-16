@@ -75,5 +75,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 
 # Biblioteca para gerar gráficos nas páginas
-gem 'chartkick'
+# gem 'chartkick'
+# gem 'groupdate' # optional
+gem 'apexcharts'
 

@@ -1,6 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: #04576262;
+  height: 70px;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -16,6 +17,7 @@
 }
 
 .navbar p {
+  padding-top: 15px;
   color: white;
   font-size: 24px;
 }
@@ -24,3 +26,12 @@
   vertical-align: text-bottom;
 }
 
+.n-link{
+  color:white;
+  font-size:20px;
+  padding-top: 50px;
+}
+
+.navbar-nav{
+  align-items: center;
+}
