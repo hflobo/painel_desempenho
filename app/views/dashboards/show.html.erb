@@ -1,0 +1,51 @@
+<div class="container">
+
+      <div class="text-center">
+        <h2><%= @dashboard.nome %></h2>
+      </div>
+      <div class="dashboard <%= cookies[:theme] %>">
+        <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>
+          <div class="dashboard-card">
+            <div class="dashboard-card-content" >
+              <h3><%= kpi.indicator.values.last.valor %></h3>
+              <p> <%= "#{kpi.indicator.sigla}: #{kpi.nome}" %> </p>
+              Meta: <%= kpi.indicator.goals.last.valor %>
+            </div>
+            <%= render_graphic kpi %>
+          </div>
+         <!--  <div class="dashboard-card stat">
+            <div class="dashboard-card-content">
+              <h3>758</h3>
+              <p>Fiscalizações</p>
+              <%= line_chart ({"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 }) %>
+            </div>
+          </div>
+          <div class="dashboard-card stat">
+            <div class="dashboard-card-content">
+              <h3>119</h3>
+              <p>Autuações</p>
+              <%= column_chart ({"Jun/2020" => 1.25, "Jul/2020" => 1.35, "Ago/2020" => 1.40,"Set/2020" => 1.20,"Out/2020" => 1.39, "Nov/2020" => 1.40 }), colors: ["#04576262", "#4e8d7c"] %>
+            </div>
+          </div> -->
+        <% end %>
+        <div class="dashboard-card dashboard-plus d-flex justify-content-around align-items-center">
+          <%= link_to new_dashboard_kpi_path @dashboard do%>
+            <i class="fas fa-plus-circle fa-5x"></i>,
+          <% end %>
+        </div>
+       <!--  <div class="dashboard-card description">
+          <div class="dashboard-card-content">
+            <h3>Personalize seu painel</h3>
+            <p class="text-justify">
+              Escolha outros indicadores para acompanhar.
+            </p>
+            <%= area_chart ({"Jan" => 1.25, "Fev" => 1.35, "Mar" => 1.40,"Abr" => 1.20,"Mai" => 1.39, "Jun" => 1.40,
+                             "Jul" => 1.10, "Ago" => 1.20, "Set" => 1.03,"Out" => 1.25,"Nov" => 1.30, "Dez" => 1.18 }
+                            ), width: "800px" %>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+  </body>
+</html>
