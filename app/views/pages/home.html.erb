@@ -22,7 +22,9 @@
           <div class="dashboard-card-content">
             <h3>758</h3>
             <p>Fiscalizações</p>
-            <%= line_chart ({"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 }) %>
+                <% indicadores = {"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 } %>
+                <% metas = {"Jun" => 1.20, "Jul" => 1.30, "Ago" => 1.40,"Set" => 1.70,"Out" => 1.90, "Nov" => 1.90 } %>
+            <%= line_chart ([{name: "Indicadores", data: indicadores},{name: "Metas", data: metas}]) %>
           </div>
         </div>
         <div class="dashboard-card stat <%= cookies[:theme] %>">
