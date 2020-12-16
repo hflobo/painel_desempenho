@@ -30,8 +30,10 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+ import { filterByIndicator } from '../components/filter_by_indicator';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  filterByIndicator();
 });

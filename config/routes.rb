@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get 'alerts_sent', to: 'alerts#alerts_sent'
   get 'alerts_received', to: 'alerts#alerts_received'
   get 'alerts_filed', to: 'alerts#alerts_filed'
+
+  resources :values
 end

@@ -1,0 +1,21 @@
+<div class="container w-50">
+    <h1 class="text-center">Valor de <%= @value.indicator.nome %></h1>
+  <div class="notifications">
+      <div class="notification">
+        <div class="notification-content">
+          <p>Ano: <small><%= @value.ano %></small></p>
+          <p>Período: <small><%= @value.periodo %></small></p>
+          <p>Valor: <small><%= @value.valor %></small></p>
+          <p>Indicador: <small><%= @value.indicator.nome %></small></p>
+          <p>Id: <small><%= @value.id %></small></p>
+        </div>
+        <div class="notification-actions">
+          <a><%= link_to "Editar valor", edit_value_path(@value), class: "a-primary" %>
+                <i class="fas fa-chart-bar"></i></a>
+        </div>
+      </div>
+  </div>
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+  </div>
+</div>
