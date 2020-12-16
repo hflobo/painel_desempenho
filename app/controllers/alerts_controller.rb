@@ -25,7 +25,7 @@ class AlertsController < ApplicationController
     @alert.criador_id = current_user.id
     @alert.arquivado = false
     if @alert.save
-      redirect_to alerts_sent_path, notice: 'Alerta criado com sucesso.'
+      redirect_to alerts_sent_path, notice: 'Alerta criado com sucesso'
     else
       @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
       @indicators = Indicator.all
@@ -38,27 +38,34 @@ class AlertsController < ApplicationController
   def edit
   end
 
-  def providencia
-  end
-
   def update
-    if @alert.update(alert_params)
-      if User.find(@alert.criador_id) == current_user
-        redirect_to alerts_sent_path, notice: 'Alerta editado com sucesso.'
+    if params[:alert].nil?
+      if @alert.data_ciencia.nil?
+        if @alert.update(data_ciencia: Date.today)
+          redirect_to alerts_received_path, notice: 'Data de ciência informada com sucesso'
+        else
+          render :alerts_received
+        end
+      elsif !@alert.arquivado
+        if @alert.update(arquivado: true)
+          redirect_to alerts_sent_path, notice: 'Alerta arquivado com sucesso'
+        else
+          render :alerts_sent
+        end
+      end
+    elsif params[:alert]["texto_providencia"].nil?
+      if @alert.update(alert_params)
+        redirect_to alerts_sent_path, notice: 'Alerta editado com sucesso'
       else
-        redirect_to alerts_received_path, notice: 'Providencia informada com sucesso.'
+        render :edit
       end
     else
-      render :edit
-    end
-  end
-
-  def confirm
-    @alert.data_ciencia = Date.today
-    if @alert.update
-      redirect_to alerts_received_path, notice: 'Confirmado recebimento do alerta.'
-    else
-      render :edit
+      @alert.data_providencia = Date.today
+      if @alert.update(alert_params)
+        redirect_to alerts_received_path, notice: 'Providencia informada com sucesso'
+      else
+        render :alerts_received
+      end
     end
   end
 

@@ -11,7 +11,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   </head>
 
-  <body>
+  <body class="<%= cookies[:theme] %>">
+ 
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 

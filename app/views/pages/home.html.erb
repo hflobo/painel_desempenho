@@ -3,7 +3,7 @@
    
 
       <div class="dashboard">
-        <div class="dashboard-card main">
+        <div class="dashboard-card main <%= cookies[:theme] %>">
           <div class="dashboard-card-content">
             <img url(<%= image_url("barra_horizontal.jpg") %>), alt="" width="150" class="img-circle">
             <h2>Receita Federal</h2>
@@ -11,28 +11,30 @@
             <a href="#" class="btn btn-primary btn-lg">Acesse</a>
           </div>
         </div>
-        <div class="dashboard-card stat">
+        <div class="dashboard-card stat <%= cookies[:theme] %>">
           <div class="dashboard-card-content" >
             <h3>3,536</h3>
             <p>Arrecadação - Meta</p>
             <%= pie_chart ({"Não cumprida" => 25, "Cumprida" => 75}), donut: true, download: true, colors: ["#04576262", "#4e8d7c"] %>
           </div>
         </div>
-        <div class="dashboard-card stat">
+        <div class="dashboard-card stat <%= cookies[:theme] %>">
           <div class="dashboard-card-content">
             <h3>758</h3>
             <p>Fiscalizações</p>
-            <%= line_chart ({"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 }) %>
+                <% indicadores = {"Jun" => 1.25, "Jul" => 1.35, "Ago" => 1.40,"Set" => 1.20,"Out" => 1.39, "Nov" => 1.40 } %>
+                <% metas = {"Jun" => 1.20, "Jul" => 1.30, "Ago" => 1.40,"Set" => 1.70,"Out" => 1.90, "Nov" => 1.90 } %>
+            <%= line_chart ([{name: "Indicadores", data: indicadores},{name: "Metas", data: metas}]) %>
           </div>
         </div>
-        <div class="dashboard-card stat">
+        <div class="dashboard-card stat <%= cookies[:theme] %>">
           <div class="dashboard-card-content">
             <h3>119</h3>
             <p>Autuações</p>
             <%= column_chart ({"Jun/2020" => 1.25, "Jul/2020" => 1.35, "Ago/2020" => 1.40,"Set/2020" => 1.20,"Out/2020" => 1.39, "Nov/2020" => 1.40 }), colors: ["#04576262", "#4e8d7c"] %>
           </div>
         </div>
-        <div class="dashboard-card description">
+        <div class="dashboard-card description <%= cookies[:theme] %>">
           <div class="dashboard-card-content">
             <h3>Personalize seu painel</h3>
             <p class="text-justify">

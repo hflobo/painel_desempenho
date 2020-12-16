@@ -1,10 +1,13 @@
-<%= simple_form_for(indicator) do |f| %>
-  <%= f.input :nome %>
-  <%= f.input :sigla %>
-  <%= f.input :finalidade %>
-  <%= f.input :abrangencia %>
-  <%= f.input :unidade_de_medida %>
-  <%= f.input :qtd_apuracoes_ano %>
-  <%= f.input :qtd_metas_ano %>
-  <%= f.submit class: "btn btn-success"%>
+<%= simple_form_for(@indicator) do |f| %>
+  <%= f.input :nome, label: "Nome: " %>
+  <%= f.input :sigla, label: "Sigla: " %>
+  <%= f.input :finalidade, label: "Finalidade: " %>
+  <%= f.input :abrangencia, label: "Abrangência: "%>
+  <%= f.input :unidade_de_medida, label: "Unidade de medida: " %>
+  <%= f.input :region_id, label_method: :nome, collection: @regions, label: "Região: " %>
+  <%= f.input :objective_id, label_method: :nome, collection: @objectives, label: "Objetivo: " %>
+  <%= f.input :qtd_apuracoes_ano, label: "Quantidade de apurações por ano? "%>
+  <%= f.input :qtd_metas_ano, label: "Quantidade de metas por ano? " %>
+  <%= f.submit "#{@indicator.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
+
 <% end %>

@@ -1,14 +1,21 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
     <table>
     <tr>
-    <td>
-    <%= link_to "/", class: "navbar-brand" do %>
-      <%= image_tag "logo_receita.jpg" %>
-    <% end %>
-    </td>
-    <td>
-    <p>Painel de Desempenho Institucional</p>
-    </td>
+      <td>
+        <%= link_to "/", class: "navbar-brand" do %>
+          <%= image_tag "logo_receita.jpg" %>
+        <% end %>
+      </td>
+      <td>
+        <p>Painel de Desempenho Institucional</p>
+      </td>
+      <td>
+        <% if cookies[:theme] == "light" %>
+          <%= link_to "  (Modo escuro)", root_path(theme: "dark") %>
+        <% else %>
+          <%= link_to "  (Modo claro)", root_path(theme: "light") %>
+        <% end %>
+      </td>
     </tr>
     </table>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,16 +25,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        
         <li class="nav-item dropdown">
-          <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboards</span>
+          <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Painéis</span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Criar", "#", class: "dropdown-item" %>
             <% @dashboards = Dashboard.where('user_id = ?', current_user.id) %>
             <% @dashboards.each do |dashboard| %>
               <%= link_to dashboard.nome, "", class: "dropdown-item"%>
             <% end %>
-           </div>
+          </div>
         </li>
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alertas <span class="badge rounded-pill bg-danger"><%= Alert.where(destinatario_id: User.last).count %></span></span>
@@ -38,11 +44,10 @@
             <%= link_to "Ver arquivados", alerts_filed_path, class: "dropdown-item" %>
           </div>
         </li>
-
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="btn btn-primary dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Indicadores</span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Listar todos", indicators_index_path, class: "nav-link" %> 
+            <%= link_to "Listar todos", indicators_path, class: "nav-link" %> 
             <%= link_to "Criar novo", new_indicator_path, class: "nav-link" %>
             <%= link_to "Informar valores", new_indicator_path, class: "nav-link" %> 
             <%= link_to "Informar metas", new_indicator_path, class: "nav-link" %>

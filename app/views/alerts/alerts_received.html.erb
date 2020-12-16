@@ -2,27 +2,27 @@
   <h3>Alertas Recebidos</h3>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
-      <div class="notification">
+      <div class="notification <%= cookies[:theme] %>">
         <% if alert.criador.photo.attached? %>
             <%= cl_image_tag alert.criador.photo.key, class: "avatar-large" %>
         <% else %>
             <%= image_tag "user.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <% end %>
         <div class="notification-content">
-          <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+          <p><small><%= alert.created_at.strftime('%d/%m/%Y') %></small></p>
           <p><small><%= alert.indicator.nome %></small></p>
           <p><%= alert.descricao %></p>
-          <p>Ciência: <small>
-            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+          <p>Criador: <small style="font-color:blue"><%= alert.criador.name %></small> - Ciência: <small>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d/%m/%Y') : 'Não confirmada'}" %>
             </small>  -  Providência: <small>
-            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
+            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d/%m/%Y') : 'Não adotada'}" %>
             </small></p>
           <p><%= alert.texto_providencia %></p>
         </div>
 
         <div class="notification-actions">
           <% if !alert.data_ciencia %>
-            <a><%= link_to "Confirmar", alert, method: :confirm, class: "a-primary" %>
+            <a><%= link_to "Confirmar", alert, method: :put, class: "a-primary" %>
               <i class="fas fa-business-time"></i></a>
           <% end %>
           <a><%= link_to 'Providências', edit_alert_path(alert), class: "a-primary" %>
@@ -30,5 +30,8 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>
 </div>
