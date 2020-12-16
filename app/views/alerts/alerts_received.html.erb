@@ -12,7 +12,7 @@
           <p><small><%= alert.created_at.strftime('%d/%m/%Y') %></small></p>
           <p><small><%= alert.indicator.nome %></small></p>
           <p><%= alert.descricao %></p>
-          <p>Criador: <small style="font-color:blue"><%= alert.criador.name %></small> - Ciência: <small>
+          <p>Criador: <small><%= alert.criador.name %></small> - Ciência: <small>
             <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d/%m/%Y') : 'Não confirmada'}" %>
             </small>  -  Providência: <small>
             <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d/%m/%Y') : 'Não adotada'}" %>
@@ -22,10 +22,10 @@
 
         <div class="notification-actions">
           <% if !alert.data_ciencia %>
-            <a><%= link_to "Confirmar", alert, method: :put, class: "a-primary" %>
+            <a><%= link_to "Confirmar ", alert, method: :put, class: "a-primary" %>
               <i class="fas fa-business-time"></i></a>
           <% end %>
-          <a><%= link_to 'Providências', edit_alert_path(alert), class: "a-primary" %>
+          <a><%= link_to 'Providências ', edit_alert_path(alert), class: "a-primary" %>
             <i class="far fa-lightbulb"></i></a>
         </div>
       </div>

@@ -1,12 +1,12 @@
 <div class="container">
 
-      <div class="text-center">
+      <div>
         <h2><%= @dashboard.nome %></h2>
       </div>
-      <div class="dashboard <%= cookies[:theme] %>">
+      <div class="dashboard">
         <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>
-          <div class="dashboard-card">
-            <div class="dashboard-card-content" >
+          <div class="dashboard-card <%= cookies[:theme] %>">
+            <div class="dashboard-card-content <%= cookies[:theme] %>" >
               <h3><%= kpi.indicator.values.last.valor %></h3>
               <p> <%= "#{kpi.indicator.sigla}: #{kpi.nome}" %> </p>
               Meta: <%= kpi.indicator.goals.last.valor %>
@@ -28,7 +28,7 @@
             </div>
           </div> -->
         <% end %>
-        <div class="dashboard-card dashboard-plus d-flex justify-content-around align-items-center">
+        <div class="dashboard-card <%= cookies[:theme] %> dashboard-plus d-flex justify-content-around align-items-center">
           <%= link_to new_dashboard_kpi_path @dashboard do%>
             <i class="fas fa-plus-circle fa-5x"></i>,
           <% end %>

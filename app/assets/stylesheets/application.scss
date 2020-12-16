@@ -14,7 +14,7 @@
 @import "components/notification";
 
 body.light {
-  color:rgb(52, 58, 64);
+  color:rgba(18, 9, 61, 0.746);
   background-color:#f0eaea;
 }
 body.dark {
@@ -36,7 +36,9 @@ p {
 h1, h2, h3 {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+  
 }
+
 h1 {
   font-size: 30px;
 }

@@ -14,7 +14,7 @@
   grid-column: 2 / span 3;
 }
 .dashboard-card {
-  background: white;
+  background: #fafbfe;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   padding: 10px;
   margin: 10px;
@@ -24,7 +24,7 @@
 }
 
 .dashboard-card-content {
-  background: white;
+  background: #fafbfe;
   padding: 4px;
   margin: 4px;
   text-align: center;
@@ -39,6 +39,11 @@
 }
 
 .dashboard-card.dark{
+  background: rgb(55, 64, 74);
+  color: #8391a2!important;
+}
+
+.dashboard-card-content.dark{
   background: rgb(55, 64, 74);
   color: #8391a2!important;
 }
@@ -58,14 +63,18 @@
   font-size: 25px;
   margin-bottom: 15px;
 }
-.dashboard p {
-  color: rgba(0,0,0,0.5);
-  font-size: 16px;
-}
+
+
 .dashboard p.dark {
   color: #8391a2!important;
   font-size: 16px;
 }
+
+.dashboard-card-content p.dark{
+  background: rgb(55, 64, 74);
+  color: #8391a2!important;
+}
+
 .dashboard img {
   border-radius: 50%;
 }
