@@ -1,5 +1,5 @@
 <div class='container' >
-  <h2>Alertas Arquivados</h2>
+  <h3>Alertas Arquivados</h3>
   <div class='notifications'>
     <% @alerts.each do |alert| %>
       <div class="notification">
@@ -9,13 +9,13 @@
             <%= image_tag "user.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
         <% end %>
         <div class="notification-content">
-          <p><small><%= alert.created_at.strftime('%d.%m.%Y %H:%M') %></small></p>
+          <p><small><%= alert.created_at.strftime('%d/%m/%Y') %></small></p>
           <p><small><%= alert.indicator.nome %></small></p>
           <p><%= alert.descricao %></p>
           <p>Destinatário: <small style="font-color:blue"><%= alert.destinatario.name %></small> - Ciência: <small>
-            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d.%m.%Y %H:%M') : 'Não confirmada'}" %>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d/%m/%Y') : 'Não confirmada'}" %>
             </small>  -  Providência: <small>
-            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d.%m.%Y %H:%M') : 'Não adotada'}" %>
+            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d/%m/%Y') : 'Não adotada'}" %>
             </small></p>
           <p><%= alert.texto_providencia %></p>
         </div>
