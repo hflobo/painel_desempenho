@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_15_175042) do
+
+ActiveRecord::Schema.define(version: 2020_12_16_235126) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_175042) do
   create_table "goals", force: :cascade do |t|
     t.integer "ano"
     t.integer "periodo"
-    t.decimal "valor", precision: 3, scale: 2
+    t.decimal "valor", precision: 10, scale: 2
     t.bigint "indicator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,7 +74,6 @@ ActiveRecord::Schema.define(version: 2020_12_15_175042) do
   create_table "indicators", force: :cascade do |t|
     t.string "nome"
     t.string "sigla"
-    t.string "finalidade"
     t.string "abrangencia"
     t.string "unidade_de_medida"
     t.integer "qtd_apuracoes_ano"
@@ -84,13 +85,13 @@ ActiveRecord::Schema.define(version: 2020_12_15_175042) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "tipo_meta_max", default: true, null: false
+    t.integer "valor_maximo", default: 1, null: false
     t.index ["objective_id"], name: "index_indicators_on_objective_id"
     t.index ["region_id"], name: "index_indicators_on_region_id"
     t.index ["user_id"], name: "index_indicators_on_user_id"
   end
 
   create_table "kpis", force: :cascade do |t|
-    t.string "destaque"
     t.integer "ordem"
     t.string "tipo_grafico"
     t.bigint "indicator_id", null: false
@@ -98,6 +99,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_175042) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "nome", limit: 50
+    t.boolean "destaque", default: false, null: false
     t.index ["dashboard_id"], name: "index_kpis_on_dashboard_id"
     t.index ["indicator_id"], name: "index_kpis_on_indicator_id"
   end
@@ -133,7 +135,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_175042) do
   create_table "values", force: :cascade do |t|
     t.integer "ano"
     t.integer "periodo"
-    t.decimal "valor", precision: 3, scale: 2
+    t.decimal "valor", precision: 10, scale: 2
     t.bigint "indicator_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

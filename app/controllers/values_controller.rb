@@ -3,7 +3,6 @@ class ValuesController < ApplicationController
   
   def index
     @values = policy_scope(Value)
-
   end
 
   def show
@@ -22,7 +21,7 @@ class ValuesController < ApplicationController
   def create
     @value = Value.new(value_params)
     authorize @value
-    @value.user_id = current_user.id
+#    @value.user_id = current_user.id
     if @value.save!
       redirect_to values_path(@value), notice: "Valor foi cadastrado com sucesso"
     else
@@ -34,6 +33,7 @@ class ValuesController < ApplicationController
     @value = Value.find(params[:id])
     @values = policy_scope(Value)
     authorize @value
+    @indicators = Indicator.all
   end
 
   def update
@@ -44,6 +44,10 @@ class ValuesController < ApplicationController
   end
 
   def destroy
+    @value = Value.find(params[:id])
+    authorize @value
+    @value.destroy
+    redirect_to values_path
   end
 
   private

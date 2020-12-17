@@ -1,9 +1,9 @@
-
-
-<div class="container w-50">
-    <h1 class="text-center">Editar o valor</h1>
+<div class="container">
+    <h3>Edite o valor</h3>
     <%= render "form", value: @value %>
-
+        <div class="my-4">
+          <%= link_to "Excluir", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
+        </div>
     <div class="container">
   <table class="table">
     <thead>
@@ -12,18 +12,17 @@
         <th scope="col">Período</th>
         <th scope="col">Valor</th>
         <th scope="col">Indicador</th>
-        <th scope="col">ID</th>
+        <th scope="col">Ação</th>
       </tr>
     </thead>
     <tbody>
       <% @values.each do |value| %>
       <tr class="<%= value.indicator_id %>" <% if value.indicator_id != @value.indicator_id %> style='display: none;' <% end %>  >
         <th scope="row"><%= value.ano %></th>
-        <td><%= value.periodo %></td>
+        <td><%= value.nome_periodo_valor %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
-        <td><%= value.id %></td>
-        <td><a><i class="fas fa-chart-bar"></i></a></td>
+        <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
       </tr>
       <% end %>
     </tbody>

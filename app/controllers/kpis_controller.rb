@@ -23,4 +23,3 @@ class KpisController < ApplicationController
   end
 
 end
-end

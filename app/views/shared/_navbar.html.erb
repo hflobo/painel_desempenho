@@ -2,7 +2,7 @@
     <table>
     <tr>
       <td>
-        <%= link_to "/", class: "navbar-brand" do %>
+        <%= link_to "/", class: "navbar-brand", data: {turbolinks: "false"} do %>
           <%= image_tag "logo_receita.jpg" %>
         <% end %>
       </td>
@@ -11,9 +11,9 @@
       </td>
       <td>
         <% if cookies[:theme] == "light" %>
-          <%= link_to "  (Modo escuro)", root_path(theme: "dark") %>
+          <%= link_to "  (Modo escuro)", root_path(theme: "dark"), data: {turbolinks: "false"} %>
         <% else %>
-          <%= link_to "  (Modo claro)", root_path(theme: "light"), class:"text-muted" %>
+          <%= link_to "  (Modo claro)", root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} %>
         <% end %>
       </td>
     </tr>
@@ -28,28 +28,30 @@
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="dropdown-toggle n-link" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-chart-bar"></i> Painéis</span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Criar", "#", class: "dropdown-item" %>
+            <%= link_to "Criar", "#", class: "dropdown-item", data: {turbolinks: "false"} %>
             <% @dashboards = Dashboard.where('user_id = ?', current_user.id) %>
             <% @dashboards.each do |dashboard| %>
-              <%= link_to dashboard.nome, "", class: "dropdown-item"%>
+              <%= link_to dashboard.nome, "", class: "dropdown-item", data: {turbolinks: "false"} %>
             <% end %>
           </div>
         </li>
         <li class="nav-item dropdown">
-          <span style="margin:10px;" class="dropdown-toggle n-link" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell"></i> Alertas <span class="badge rounded-pill bg-danger"><%= Alert.where(destinatario_id: User.last).count %></span></span>
+          <span style="margin:10px;" class="dropdown-toggle n-link" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell"></i> Alertas <span class="badge rounded-pill bg-danger"><%= Alert.where(destinatario_id: current_user).count %></span></span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Criar", new_alert_path, class: "dropdown-item" %>
-            <%= link_to "Ver recebidos", alerts_received_path, class: "dropdown-item"%>
-            <%= link_to "Ver enviados", alerts_sent_path, class: "dropdown-item" %>
-            <%= link_to "Ver arquivados", alerts_filed_path, class: "dropdown-item" %>
+            <%= link_to "Recebidos", alerts_received_path, class: "dropdown-item"%>
+            <%= link_to "Enviados", alerts_sent_path, class: "dropdown-item" %>
+            <%= link_to "Arquivados", alerts_filed_path, class: "dropdown-item" %>
           </div>
         </li>
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="dropdown-toggle n-link" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-chart-line"></i> Indicadores</span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Listar todos", indicators_path, class: "nav-link" %> 
-            <%= link_to "Criar novo", new_indicator_path, class: "nav-link" %>
-            <%= link_to "Informar valores", new_indicator_path, class: "nav-link" %> 
+            <%= link_to "Criar", new_indicator_path, class: "nav-link" %>
+            <%= link_to "Listar valores", values_path, class: "nav-link" %> 
+            <%= link_to "Informar valores", new_value_path, class: "nav-link" %>
+            <%= link_to "Listar Metas", new_value_path, class: "nav-link" %>
             <%= link_to "Informar metas", new_indicator_path, class: "nav-link" %>
           </div>
         </li>
