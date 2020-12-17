@@ -112,6 +112,7 @@ Objective.all.each do |objective|
                         finalidade: "indicar percentual de #{objective.nome}",
                         abrangencia: "regional",
                         unidade_de_medida: indicator.unidade_de_medida,
+                        valor_maximo: [1,100,1000].sample,
                         qtd_apuracoes_ano: [2, 4, 12].sample,
                         qtd_metas_ano: rand(1..2),
                         user_id: usr1_id,
@@ -129,7 +130,7 @@ Indicator.all.each do |indicator|
     indicator.qtd_metas_ano.times do |i|
       Goal.create!(ano: ano,
                    periodo: i + 1,
-                   valor: rand,
+                   valor: rand * indicator.valor_maximo,
                    indicator_id: indicator.id)
     end
   end
@@ -141,7 +142,7 @@ Indicator.all.each do |indicator|
     indicator.qtd_apuracoes_ano.times do |i|
       Value.create!(ano: ano,
                     periodo: i + 1,
-                    valor: rand,
+                    valor: rand * indicator.valor_maximo,
                     indicator_id: indicator.id)
     end
   end
@@ -159,12 +160,13 @@ puts "creating kpis..."
 Dashboard.all.each do |dashboard|
   indicadores = Indicator.all.sample(5)
   indicadores.each_with_index do |ind, i|
+    tipo = ["circular", "circular", "circular", "circular", "linha", "barra"].sample
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
                 nome: ind.nome,
-                destaque: :null,
+                destaque: tipo == "circular" ? false : true,
                 ordem: i + 1,
-                tipo_grafico: "velocimetro")
+                tipo_grafico: tipo)
   end
 end
 
