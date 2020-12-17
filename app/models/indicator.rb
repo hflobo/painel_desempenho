@@ -94,7 +94,7 @@ class Indicator < ApplicationRecord
       valorobj.each do |valor|
         metaobj[valor[0]] = metascheio[valor[0]] if metaobj[valor[0]].nil?
       end
-      return [{ name: "Indicadores", data: valorobj }, { name: "Metas", data: metaobj }]
+      return [{ name: "Indicador", data: valorobj }, { name: "Meta", data: metaobj }]
     end
   end
 

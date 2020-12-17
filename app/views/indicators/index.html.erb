@@ -4,10 +4,10 @@
     <% @indicators.each do |indicator| %>
       <div class="notification <%= cookies[:theme] %>"">
         <div class="notification-content">
-          <small><% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
-          <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
-          <%= name %></small>
-          <p style="font-size=30px"><%= indicator.objective.nome %></p>
+          <p><small><%= "#{indicator.nome}"%></small></p>
+          <p><small><%= "#{indicator.abrangencia}" %>
+            <%= indicator.abrangencia.upcase == 'REGIONAL' ? ": #{indicator.region.nome}" : "" %></small></p>
+          <p class="font-size=30px"><%= indicator.objective.nome %></p>
         </div>
         <div class="notification-actions">
           <a><%= link_to "Ver com linhas", indicator_path(indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} %>
