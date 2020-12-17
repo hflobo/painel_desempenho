@@ -1,4 +1,4 @@
-<%= simple_form_for(@goal) do |f| %>
+<%= simple_form_for(@value) do |f| %>
   <div class="form-inputs">
     <% if !@indicator %>
       <%= f.input :indicator_id, label: "Indicador", label_method: :name_of_method, goal_method: :id, collection: @indicators %>
@@ -7,5 +7,5 @@
     <%= f.input :periodo, label: "Período: " %>
     <%= f.input :valor, label: "Valor: " %>
   </div>
-  <%= f.submit "#{@goal.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
+  <%= f.submit "#{@value.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
 <% end %>
