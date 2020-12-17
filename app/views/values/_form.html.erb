@@ -1,7 +1,7 @@
 <%= simple_form_for(@value) do |f| %>
   <div class="form-inputs">
     <% if !@indicator %>
-      <%= f.input :indicator_id, label: "Indicador", label_method: :name_of_method, value_method: :id, collection: @indicators %>
+      <%= f.input :indicator_id, label: "Indicador", label_method: :name_of_method, goal_method: :id, collection: @indicators %>
     <% end %>
     <%= f.input :ano, label: "Ano: " %>
     <%= f.input :periodo, label: "Período: " %>

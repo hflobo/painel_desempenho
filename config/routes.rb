@@ -9,17 +9,18 @@ Rails.application.routes.draw do
  # get 'new_indicator', to: 'indicator#new'
     resources :kpi
   end
-
+  resources :values
+  resources :goals
+  
   resources :alerts
 
   get 'alerts_sent', to: 'alerts#alerts_sent'
   get 'alerts_received', to: 'alerts#alerts_received'
   get 'alerts_filed', to: 'alerts#alerts_filed'
 
-  resources :values
-
   resources :dashboards, only: %i[show new create destroy] do
-    resources :kpis, only: %i[show new create destroy]
+    resources :kpis, only: %i[new create edit update]
   end
 
+  resources :kpis, only: %i[destroy]
 end
