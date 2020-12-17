@@ -19,7 +19,7 @@
       <% @values.each do |value| %>
       <tr class="<%= value.indicator_id %>" <% if value.indicator_id != @value.indicator_id %> style='display: none;' <% end %>  >
         <th scope="row"><%= value.ano %></th>
-        <td><%= value.nome_periodo_valor %></td>
+        <td><%= value.nome_periodo_valor(value.indicator.qtd_apuracoes_ano) %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
         <td><a><%= link_to "Editar", edit_value_path(value), class: "tab-link" %><i class="fas fa-edit"></i></a></td>

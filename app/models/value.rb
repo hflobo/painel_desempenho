@@ -7,9 +7,10 @@ class Value < ApplicationRecord
   validates :periodo, numericality: { less_than_or_equal_to: ->(value) { value.indicator.qtd_apuracoes_ano },
                                       message: "Um indicador não pode ter mais valores em um ano que o indicado em seu cadastro." }
 
-  def nome_periodo_valor
-    mes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-    case indicator.qtd_apuracoes_ano
+  def nome_periodo_valor(qtd_apuracoes)
+    mes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+           'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    case qtd_apuracoes
     when 1
       "Ano"
     when 2

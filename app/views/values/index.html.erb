@@ -19,7 +19,7 @@
       <% @values.each do |value| %>
       <tr>
         <th scope="row"><%= value.ano %></th>
-        <td><%= value.nome_periodo_valor %></td>
+        <td><%= value.nome_periodo_valor(value.indicator.qtd_apuracoes_ano) %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
         <td><%= link_to "Ver", value_path(value), class: "tab-link"%><i class="fas fa-search-plus"></i></td>
