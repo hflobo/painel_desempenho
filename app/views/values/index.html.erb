@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -6,22 +9,26 @@
         <th scope="col">Período</th>
         <th scope="col">Valor</th>
         <th scope="col">Indicador</th>
-        <th scope="col">ID do valor</th>
+        <th scope="col">Ações</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <% @values.each do |value| %>
       <tr>
         <th scope="row"><%= value.ano %></th>
-        <td><%= value.periodo %></td>
+        <td><%= value.nome_periodo_valor %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
-        <td><%= value.id %></td>
         <td><a><%= link_to "Ver", value_path(value), class: "a-primary" %><i class="fas fa-search-plus"></i></a></td>
         <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
-        <td><a><%= link_to "Delete #{value.id}", value_path(value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "a-primary" %><i class="fas fa-trash-alt"></i></a></td>
+        <td><a><%= link_to "Excluir", value_path(value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "a-primary" %><i class="fas fa-trash-alt"></i></a></td>
       </tr>
       <% end %>
     </tbody>
   </table>
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+  </div>
 </div>
