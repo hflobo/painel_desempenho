@@ -5,7 +5,7 @@
           <%= link_to "Excluir", goal_path(@goal), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
         </div>
     <div class="container">
-  <table class="table">
+  <table class="table cores-tb <%= cookies[:theme] %>">
     <thead>
       <tr>
         <th scope="col">Ano</th>
@@ -22,7 +22,7 @@
         <td><%= goal.nome_periodo_valor %></td>
         <td><%= goal.valor %></td>
         <td><%= goal.indicator.nome %></td>
-        <td><a><%= link_to "Editar", edit_goal_path(goal), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
+        <td><a><%= link_to "Editar", edit_goal_path(goal), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
       </tr>
       <% end %>
     </tbody>
