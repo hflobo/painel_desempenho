@@ -1,14 +1,18 @@
 <div class='container'>
   <div class='notifications'>
         <h3><%= @indicator.nome %></h3>
-    <div class="notification">
+    <div class="notification <%= cookies[:theme] %>">
         <div class="notification-content">
+          <p>Objetivo: <small><%= @indicator.objective.nome %></small></p>
           <p>Sigla: <small><%= @indicator.sigla %></small></p>
-          <p>Abrangência: <small><%= @indicator.abrangencia %></small></p>
+          <p>Abrangência: <small><%= @indicator.abrangencia %></small>
+          <% if @indicator.abrangencia.upcase == "REGIONAL" %>
+            - Região: <small><%= @indicator.region.nome %></small>
+          <% end %>
+          </p>
           <p>Unidade de medida: <small><%= @indicator.unidade_de_medida %></small></p>
-          <p>Quantidade de apurações por ano: <small><%= @indicator.qtd_apuracoes_ano %></small></p>
-          <p>Quantidade de metas por ano: <small><%= @indicator.qtd_metas_ano %></small></p>
-          <p>Região: <small><%= @indicator.region.nome %></small></p>
+          <p>Quantidade de apurações por ano: <small><%= @indicator.qtd_apuracoes_ano %>
+          </small>  -  Quantidade de metas por ano: <small><%= @indicator.qtd_metas_ano %></small></p>
         </div>
         <div class="notification-actions">
             <% if params[:graf] == "barra" %>
