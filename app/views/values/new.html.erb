@@ -1,6 +1,8 @@
 <div class="container">
-  <h2>Cadastre novo valor</h2>
-  <%= render "form", value: @value %>
+
+  <h3>Cadastre novo valor</h3>
+  <%= render "values/form", value: @value %>
+
   <div class="my-4">
   <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>

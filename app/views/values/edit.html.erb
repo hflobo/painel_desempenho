@@ -1,6 +1,6 @@
 <div class="container">
     <h3>Edite o valor</h3>
-    <%= render "form", value: @value %>
+    <%= render "values/form", value: @value %>
         <div class="my-4">
           <%= link_to "Excluir", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
         </div>
