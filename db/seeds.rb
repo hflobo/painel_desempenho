@@ -184,7 +184,7 @@ Dashboard.all.each do |dashboard|
     tipo = ["circular", "circular", "circular", "circular", "linha", "barra"].sample
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
-                nome: ind.nome,
+                nome: ind.nome[0..49],
                 destaque: tipo == "circular" ? false : true,
                 ordem: i + 1,
                 tipo_grafico: tipo)

@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   resources :values
 
   resources :dashboards, only: %i[show new create destroy] do
-    resources :kpis, only: %i[show new create destroy]
+    resources :kpis, only: %i[new create edit update]
   end
 
+  resources :kpis, only: %i[destroy]
 end
