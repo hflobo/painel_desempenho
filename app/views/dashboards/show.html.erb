@@ -1,12 +1,10 @@
 <div class="container text-center">
 
-  <div class="text-center">
-    <h2><%= @dashboard.nome %></h2>
-  </div>
   <div class="dashboard <%= cookies[:theme] %>">
+    <h2><%= @dashboard.nome %></h2>
     <div class="row p-auto m-auto">
-      <% nova_linha = false %>
-      <% num_cards = 0 %>
+      <!-- <% nova_linha = false %>
+      <% num_cards = 0 %> -->
       <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>
        <!--  <% if nova_linha %>
           <div class="row p-auto m-auto">
@@ -21,8 +19,8 @@
           </div>
           <%= render_graphic kpi %>
         </div>
-        <% num_cards >= 4 ? nova_linha = true : nova_linha = false %>
-       <!--  <% if nova_linha %>
+       <!--   <% num_cards >= 4 ? nova_linha = true : nova_linha = false %>
+        <% if nova_linha %>
           </div>
         <% end %> -->
       <% end %>
