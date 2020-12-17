@@ -125,7 +125,6 @@ Objective.all.each do |objective|
     5.times do |i|
       Indicator.create!(nome: "Índice de #{objective.nome}",
                         sigla: "i#{objective.nome.split.map(&:first).join}",
-                        finalidade: "indicar percentual de #{objective.nome}",
                         abrangencia: "regional",
                         unidade_de_medida: indicator.unidade_de_medida,
                         valor_maximo: [1,100,1000].sample,
@@ -184,7 +183,7 @@ Dashboard.all.each do |dashboard|
     tipo = ["circular", "circular", "circular", "circular", "linha", "barra"].sample
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
-                nome: ind.nome,
+                nome: ind.nome[0..49],
                 destaque: tipo == "circular" ? false : true,
                 ordem: i + 1,
                 tipo_grafico: tipo)
