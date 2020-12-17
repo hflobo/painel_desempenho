@@ -31,31 +31,38 @@ puts 'creating users...'
 User.create!(email: 'hflobo@gmail.com',
              password: '123456',
              name: 'Hugo',
-             admin: true)
+             admin: true,
+             gestor: true)
 
 User.create!(email: 'joao.thiago@email.com',
              password: '123456',
              name: 'João Thiago',
-             admin: true)
+             admin: true,
+             gestor: true)
+
 User.create!(email: 'joao.vicente@email.com',
              password: '123456',
              name: 'João Vicente',
-             admin: true)
+             admin: true,
+             gestor: true)
 
 User.create!(email: 'marina@email.com',
              password: '123456',
              name: 'Marina',
-             admin: true)
+             admin: true,
+             gestor: true)
 
 User.create!(email: 'orelha@email.com',
              name: 'Zé Orelha',
              password: '123456',
-             admin: false)
+             admin: false,
+             gestor: false)
 
 User.create!(email: 'outro_orelha@email.com',
              name: 'Mané Orelha',
              password: '123456',
-             admin: false)
+             admin: false,
+             gestor: false)
 
 puts 'Creating objectives...'
 Objective.create!(nome: "Aproximar a arrecadação efetiva da potencial",
@@ -95,7 +102,7 @@ usr1_id = User.first.id
 Objective.all.each do |objective|
   case objective.nome
   when "Aproximar a arrecadação efetiva da potencial"
-    nome = 'Índice de Realização da Meta Global de Arrecadação Bruta'
+    nome = 'Índice de realização da meta global de arrecadação bruta'
   when "Aumentar a satisfação dos contribuintes com a Receita Federal"
     nome = "Indíce de satisfação dos contribuintes com a Receita Federal"
   when "Intensificar a oferta de serviços por meio digital"
@@ -121,22 +128,21 @@ Objective.all.each do |objective|
                                 pai_indicator_id: nil,
                                 tipo_meta_max: tipo_meta_max)
 
-  if :true == [:true, :false].sample
-    5.times do |i|
-      Indicator.create!(nome: "Índice de #{objective.nome}",
-                        sigla: "i#{objective.nome.split.map(&:first).join}",
-                        abrangencia: "regional",
-                        unidade_de_medida: indicator.unidade_de_medida,
-                        valor_maximo: [1,100,1000].sample,
-                        qtd_apuracoes_ano: [2, 4, 12].sample,
-                        qtd_metas_ano: rand(1..2),
-                        user_id: usr1_id,
-                        objective_id: objective.id,
-                        region_id: (Region.first.id + i + 1),
-                        pai_indicator_id: indicator.id,
-                        tipo_meta_max: tipo_meta_max)
-    end
+  next unless :true == %i[true false].sample
 
+  5.times do |i|
+    Indicator.create!(nome: nome,
+                      sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
+                      abrangencia: "Regional",
+                      unidade_de_medida: indicator.unidade_de_medida,
+                      valor_maximo: [1, 100, 1000].sample,
+                      qtd_apuracoes_ano: [2, 4, 12].sample,
+                      qtd_metas_ano: rand(1..2),
+                      user_id: usr1_id,
+                      objective_id: objective.id,
+                      region_id: (Region.first.id + i + 1),
+                      pai_indicator_id: indicator.id,
+                      tipo_meta_max: tipo_meta_max)
   end
 end
 
@@ -184,7 +190,7 @@ Dashboard.all.each do |dashboard|
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
                 nome: ind.nome[0..49],
-                destaque: tipo == "circular" ? false : true,
+                destaque: !(tipo == "circular"),
                 ordem: i + 1,
                 tipo_grafico: tipo)
   end
