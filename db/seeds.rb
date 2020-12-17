@@ -125,7 +125,6 @@ Objective.all.each do |objective|
     5.times do |i|
       Indicator.create!(nome: "Índice de #{objective.nome}",
                         sigla: "i#{objective.nome.split.map(&:first).join}",
-                        finalidade: "indicar percentual de #{objective.nome}",
                         abrangencia: "regional",
                         unidade_de_medida: indicator.unidade_de_medida,
                         valor_maximo: [1,100,1000].sample,
