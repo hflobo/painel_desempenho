@@ -1,12 +1,12 @@
 <div class="container">
-  <h3>Cadastre novo valor</h3>
+  <h2>Cadastre novo valor</h2>
   <%= render "form", value: @value %>
   <div class="my-4">
   <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>
 
   <div class="container">
-    <table class="table">
+    <table class="table cores-tb <%= cookies[:theme] %>">
       <thead>
         <tr>
           <th scope="col">Ano</th>
@@ -23,7 +23,7 @@
           <td><%= value.nome_periodo_valor %></td>
           <td><%= value.valor %></td>
           <td><%= value.indicator.nome %></td>
-          <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
+          <td><a><%= link_to "Editar", edit_value_path(value), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
         </tr>
         <% end %>
       </tbody>
