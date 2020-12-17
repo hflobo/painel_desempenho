@@ -1,8 +1,9 @@
 <div class="container">
-  <div class="my-4">
+  <div>
     <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>
-  <table class="table">
+  <br>
+  <table class="table cores-tb <%= cookies[:theme] %>">
     <thead>
       <tr>
         <th scope="col">Ano</th>
@@ -21,9 +22,9 @@
         <td><%= value.nome_periodo_valor %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
-        <td><a><%= link_to "Ver", value_path(value), class: "a-primary" %><i class="fas fa-search-plus"></i></a></td>
-        <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
-        <td><a><%= link_to "Excluir", value_path(value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "a-primary" %><i class="fas fa-trash-alt"></i></a></td>
+        <td><%= link_to "Ver", value_path(value), class: "tab-link"%><i class="fas fa-search-plus"></i></td>
+        <td><a><%= link_to "Editar", edit_value_path(value), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
+        <td><a><%= link_to "Excluir", value_path(value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "tab-link" %><i class="fas fa-trash-alt"></i></a></td>
       </tr>
       <% end %>
     </tbody>
