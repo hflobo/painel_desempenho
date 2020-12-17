@@ -120,20 +120,24 @@ Objective.all.each do |objective|
                                 region_id: Region.first.id,
                                 pai_indicator_id: nil,
                                 tipo_meta_max: tipo_meta_max)
-  next unless :true == %i[true false].sample
 
-  5.times do |i|
-    Indicator.create!(nome: nome,
-                      sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
-                      abrangencia: "Regional",
-                      unidade_de_medida: indicator.unidade_de_medida,
-                      qtd_apuracoes_ano: [2, 4, 12].sample,
-                      qtd_metas_ano: [1, 4].sample,
-                      user_id: usr1_id,
-                      objective_id: objective.id,
-                      region_id: (Region.first.id + i + 1),
-                      pai_indicator_id: indicator.id,
-                      tipo_meta_max: tipo_meta_max)
+  if :true == [:true, :false].sample
+    5.times do |i|
+      Indicator.create!(nome: "Índice de #{objective.nome}",
+                        sigla: "i#{objective.nome.split.map(&:first).join}",
+                        finalidade: "indicar percentual de #{objective.nome}",
+                        abrangencia: "regional",
+                        unidade_de_medida: indicator.unidade_de_medida,
+                        valor_maximo: [1,100,1000].sample,
+                        qtd_apuracoes_ano: [2, 4, 12].sample,
+                        qtd_metas_ano: rand(1..2),
+                        user_id: usr1_id,
+                        objective_id: objective.id,
+                        region_id: (Region.first.id + i + 1),
+                        pai_indicator_id: indicator.id,
+                        tipo_meta_max: tipo_meta_max)
+    end
+
   end
 end
 
@@ -145,7 +149,7 @@ Indicator.all.each do |indicator|
     indicator.qtd_metas_ano.times do |i|
       Goal.create!(ano: ano,
                    periodo: i + 1,
-                   valor: val,
+                   valor: rand * indicator.valor_maximo,
                    indicator_id: indicator.id)
     end
   end
@@ -157,7 +161,7 @@ Indicator.all.each do |indicator|
     indicator.qtd_apuracoes_ano.times do |i|
       Value.create!(ano: ano,
                     periodo: i + 1,
-                    valor: rand(3.5..6.0),
+                    valor: rand * indicator.valor_maximo,
                     indicator_id: indicator.id)
     end
   end
@@ -177,12 +181,13 @@ puts "creating kpis..."
 Dashboard.all.each do |dashboard|
   indicadores = Indicator.all.sample(5)
   indicadores.each_with_index do |ind, i|
+    tipo = ["circular", "circular", "circular", "circular", "linha", "barra"].sample
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
-                nome: ind.nome.slice(0..49),
-                destaque: :null,
+                nome: ind.nome,
+                destaque: tipo == "circular" ? false : true,
                 ordem: i + 1,
-                tipo_grafico: "Rosca")
+                tipo_grafico: tipo)
   end
 end
 

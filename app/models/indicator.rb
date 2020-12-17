@@ -39,22 +39,27 @@ class Indicator < ApplicationRecord
     # Monta os Hash com os valores e metas mês a mês
     if [0, 2].include?(opcao)
       (ano_inicio..ano_final).to_a.each do |iano|
+
         valores = Value.where('ano = ? AND indicator_id = ?', iano, id)
         valores.each do |value|
           valorobj["#{mes[value.periodo * xvalue - 1]}/#{iano % 2000}"] = value.valor
+
         end
       end
     end
     if [1, 2].include?(opcao)
       (ano_inicio..ano_final).to_a.each do |iano|
+
         metas = Goal.where('ano = ? AND indicator_id = ?', iano, id)
         metas.each do |goal|
           metaobj["#{mes[goal.periodo * xgoal - 1]}/#{iano % 2000}"] = goal.valor
+
         end
       end
     end
 
     if opcao == 0
+
       return valorobj
     elsif opcao == 1
       return metaobj
@@ -65,31 +70,41 @@ class Indicator < ApplicationRecord
         when 1
           (1..11).to_a.each do |i|
             metascheio["#{mes[i - 1]}/#{iano % 2000}"] = metaobj["dez/#{iano % 2000}"]
+
           end
         when 2
           [1, 7].each do |i|
             (0..4).to_a.each do |j|
+
               metascheio["#{mes[i + j - 1]}/#{iano % 2000}"] = metaobj["#{mes[i + 4]}/#{iano % 2000}"]
+
             end
           end
         when 3
           [1, 5, 9].each do |i|
             (0..2).to_a.each do |j|
+
               metascheio["#{mes[i + j - 1]}/#{iano % 2000}"] = metaobj["#{mes[i + 2]}/#{iano % 2000}"]
+
             end
           end
         when 4
           [1, 4, 7, 10].each do |i|
             [0, 1].each do |j|
+
               metascheio["#{mes[i + j - 1]}/#{iano % 2000}"] = metaobj["#{mes[i + 1]}/#{iano % 2000}"]
+
             end
           end
         when 6
           [1, 3, 5, 7, 9, 11].each do |i|
+
             metascheio["#{mes[i - 1]}/#{iano % 2000}"] = metaobj["#{mes[i]}/#{iano % 2000}"]
+
           end
         end
       end
+
 
       valorobj.each do |valor|
         metaobj[valor[0]] = metascheio[valor[0]] if metaobj[valor[0]].nil?
@@ -126,27 +141,35 @@ class Indicator < ApplicationRecord
     when 1
       (1..11).to_a.each do |i|
         metaobj["#{mes[i - 1]}/#{iano % 2000}"] = metaobj["dez/#{iano % 2000}"]
+
       end
     when 2
       [1, 7].each do |i|
         (0..4).to_a.each do |j|
+
           metaobj["#{mes[i + j - 1]}/#{iano % 2000}"] = metaobj["#{mes[i + 4]}/#{iano % 2000}"]
+
         end
       end
     when 3
       [1, 5, 9].each do |i|
         (0..2).to_a.each do |j|
+
           metaobj["#{mes[i + j - 1]}/#{iano % 2000}"] = metaobj["#{mes[i + 2]}/#{iano % 2000}"]
+
         end
       end
     when 4
       [1, 4, 7, 10].each do |i|
         [0, 1].each do |j|
+
           metaobj["#{mes[i + j - 1]}/#{iano % 2000}"] = metaobj["#{mes[i + 1]}/#{iano % 2000}"]
+
         end
       end
     when 6
       [1, 3, 5, 7, 9, 11].each do |i|
+
         metaobj["#{mes[i - 1]}/#{iano % 2000}"] = metaobj["#{mes[i]}/#{iano % 2000}"]
       end
     end
@@ -175,4 +198,5 @@ class Indicator < ApplicationRecord
 
     return { valor: valorperc, meta: metaperc, perc_meta: percent, perc_ano: percano }
   end
+
 end
