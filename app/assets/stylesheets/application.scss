@@ -14,7 +14,7 @@
 @import "components/notification";
 
 body.dark {
-  color: white;
+  color: rgb(255, 255, 255);
   background-color:rgb(52, 58, 64);
 }
 
@@ -25,12 +25,21 @@ body {
   font-weight: 400px;
   background-color:#f0eaea;
   line-height: 1.5;
-  color: rgb(131, 143, 156);
+  color: rgb(131, 143, 156); 
+  text-align: left;
  
 }
+
 
 h1, h2, h3 {
   font-family: 'Nunito sans', sans-serif;
   font-weight: bold;
   
 }
+
+.container h1{
+  padding-left: 12px;
+  font-weight: 600px;
+  
+}
+
