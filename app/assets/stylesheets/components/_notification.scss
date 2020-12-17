@@ -2,14 +2,19 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  background: white;
+  background: #fafbfe;
   padding: 8px 16px;
-  border: 1px solid rgb(235,235,235);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  background-clip: border-box;
+  border-radius: 0.25rem;
+  margin-bottom: 24px;
 }
 
 .notification.dark{
-  background: rgb(55, 64, 74);
+  background-color: rgb(55, 64, 74);
   color: #8391a2!important;
+  background-clip: border-box;
+  border-radius: 0.25rem;
 }
 
 .notification .notification-content {
@@ -24,10 +29,11 @@
 }
 
 .notification small {
-  color: rgba(18, 9, 61, 0.746);
   font-weight: bold;
   font-size: 18px;
 }
+
+
 .notification .notification-actions {
   opacity: 0;
   display: flex;

@@ -1,8 +1,10 @@
+
 <div class="container">
   <h3>Indicadores</h3>
   <div class='notifications'>
     <% @indicators.each do |indicator| %>
       <div class="notification <%= cookies[:theme] %>"">
+
         <div class="notification-content">
           <p><small><%= "#{indicator.nome}"%></small></p>
           <p><small><%= "#{indicator.abrangencia}" %>

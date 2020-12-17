@@ -17,18 +17,22 @@
             <p> <%= "#{kpi.indicator.sigla}: #{kpi.nome}" %> </p>
             <h6>Meta: <%= kpi.indicator.goals.last.valor %></h6>
 
+
+
           </div>
           <%= render_graphic kpi %>
         </div>
        <!--   <% num_cards >= 4 ? nova_linha = true : nova_linha = false %>
         <% if nova_linha %>
           </div>
+
         <% end %> -->
       <% end %>
       <!-- <% if nova_linha %>
         <div class="row p-auto m-auto">
       <% end %> -->
         <div class="dashboard-card dashboard-card-single dashboard-plus d-flex justify-content-around align-items-center <%= cookies[:theme] %>">
+
           <%= link_to new_dashboard_kpi_path @dashboard do%>
             <i class="fas fa-plus-circle fa-5x"></i>,
           <% end %>
