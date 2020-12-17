@@ -13,11 +13,14 @@
           <p><small><%= alert.indicator.nome %></small></p>
           <p><%= alert.descricao %></p>
           <p>Destinatário: <small style="font-color:blue"><%= alert.destinatario.name %></small> - Ciência: <small>
-            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d/%m/%Y') : 'Não confirmada'}" %>
-            </small>  -  Providência: <small>
-            <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d/%m/%Y') : 'Não adotada'}" %>
-            </small></p>
-          <p><%= alert.texto_providencia %></p>
+            <%= "#{alert.data_ciencia ? alert.data_ciencia.strftime('%d/%m/%Y') : 'Não confirmada'}" %></small>
+            <% if alert.providencia %>
+              <%= "  -  Providência: " %><small>
+              <%= "#{alert.data_providencia ? alert.data_providencia.strftime('%d/%m/%Y') : 'Não adotada'}" %></small>
+              </p>
+              <p><%= alert.texto_providencia %>
+            <% end %>
+          </p>
         </div>
       </div>
     <% end %>

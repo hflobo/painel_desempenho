@@ -1,10 +1,9 @@
-<div class='container w-50'>
+<div class='container'>
   <div class='notifications'>
-        <h1 class="text-center"><%= @indicator.nome %></h1>
+        <h3><%= @indicator.nome %></h3>
     <div class="notification">
         <div class="notification-content">
           <p>Sigla: <small><%= @indicator.sigla %></small></p>
-          <p>Finalidade: <small><%= @indicator.finalidade %></small></p>
           <p>Abrangência: <small><%= @indicator.abrangencia %></small></p>
           <p>Unidade de medida: <small><%= @indicator.unidade_de_medida %></small></p>
           <p>Quantidade de apurações por ano: <small><%= @indicator.qtd_apuracoes_ano %></small></p>
@@ -12,16 +11,33 @@
           <p>Região: <small><%= @indicator.region.nome %></small></p>
         </div>
         <div class="notification-actions">
-            <a><%= link_to "Editar indicador", edit_indicator_path(@indicator), class: "a-primary" %>
-            <i class="fas fa-chart-bar"></i></a>
-
+            <% if params[:graf] == "barra" %>
+              <a><%= link_to "Ver com linhas", indicator_path(@indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} %>
+              <i class="fas fa-chart-line"></i></a>
+            <% else %>
+              <a><%= link_to "Ver com barras", indicator_path(@indicator, graf: "barra"), class: "a-primary", data: {turbolinks: 'false'} %>
+              <i class="fas fa-chart-bar"></i></a>
+            <% end %>
+            <a><%= link_to "Editar", edit_indicator_path(@indicator), class: "a-primary" %>
+            <i class="far fa-edit"></i></a>
             <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
-            <i class="fas fa-bell"></i></a>          
+            <i class="fas fa-bell"></i></a>
         </div>
     </div>
   </div>
   <div class="my-4">
     <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>
+  <hr>
+  <div class='container w-300'>
+    <% anoatual = Date.today.year %>
+    <% xarray = @indicator.param_graph(2, anoatual - 2, anoatual) %>
+    <% if params[:graf] == "linha" %>
+      <%= line_chart xarray, defer: true %>
+    <% else %>
+      <%= column_chart xarray, defer: true %>
+    <% end %>
+    <br>
+    <p><strong>Percentual de Cumprimento da Meta (mês atual):   <%= @indicator.percent_meta[:perc_meta].round(2) %>%</strong></p>
+  </div>
 </div>
-<hr>
