@@ -13,6 +13,6 @@
       <%= f.button :submit, class: "btn btn-primary" %>
     </div>
     <div class="my-4">
-      <%= link_to 'Voltar', dashboard_path(@dashboard.id), class: "btn btn-primary" %>
+      <%= link_to 'Voltar', dashboard_path(@dashboard.id), class: "btn btn-primary", data: {turbolinks: 'false'} %>
     </div>
   <% end %>
