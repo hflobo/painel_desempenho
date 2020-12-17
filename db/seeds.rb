@@ -8,14 +8,10 @@
 
 require 'faker'
 
-# puts 'Cleaning affiliateds...'
-# Affiliated.destroy_all
 puts 'Cleaning alerts...'
 Alert.destroy_all
 puts 'Cleaning goals...'
 Goal.destroy_all
-# puts 'Cleaning responsibles...'
-# Responsible.destroy_all
 puts 'Cleaning values...'
 Value.destroy_all
 puts 'Cleaning kpis...'
@@ -62,44 +58,63 @@ User.create!(email: 'outro_orelha@email.com',
              admin: false)
 
 puts 'Creating objectives...'
-Objective.create!(nome: "Reduzir sonegação fiscal",
+Objective.create!(nome: "Aproximar a arrecadação efetiva da potencial",
                   tipo: "Estratégico",
-                  descricao: "Reduzir a sonegação fiscal em 5% a.a.")
-Objective.create!(nome: "Aumentar arrecadação",
+                  descricao: "Garantir que o valor arrecadado se aproxime, ao máximo, do potencial arrecadatório")
+Objective.create!(nome: "Aumentar a satisfação dos contribuintes com a Receita Federal",
                   tipo: "Estratégico",
-                  descricao: "Aumentar a arrecadação sem promover aumento de alíquotas.")
+                  descricao: "Entregar serviços de qualidade ao cidadão, tornando mais fácil para eles cumprir suas obrigações tributárias")
 
-Objective.create!(nome: "Reduzir tempo de espera nas agências",
-                  tipo: "Tático",
-                  descricao: "Reduzir tempo de espera para atendimento nas agências")
+Objective.create!(nome: "Intensificar a oferta de serviços por meio digital",
+                  tipo: "de Processo",
+                  descricao: "Atender a todos os brasileiros, oferecendo serviços de melhor qualidade, mais simples e acessíveis")
 
-Objective.create!(nome: "Melhorar imagem junto à sociedade",
-                  tipo: "Estratégico",
-                  descricao: "Trabalhar a imagem junto à sociedade para melhorar a percepção da RF")
+Objective.create!(nome: "Agilizar a análise de demandas requeridas à Receita Federal",
+                  tipo: "de Processo",
+                  descricao: "Tempestividade no tempo de resposta às demandas, eficiência e efetividade")
 
-Objective.create!(nome: "Reduzir gastos operacionais",
-                  tipo: "Tático",
-                  descricao: "Reduzir os gastos operacionais sem afetar negativamente a produtividade")
+Objective.create!(nome: "Otimizar o desenvolvimento do corpo funcional",
+                  tipo: "de Pessoas e Recursos",
+                  descricao: "Desenvolver o corpo funcional para aprimorar suas competências para lidar com as demandas do mundo contemporãneo")
 
 puts "Creating regions..."
-Region.create!(nome: "Brasil")
-Region.create!(nome: "Sul")
-Region.create!(nome: "Sudeste")
-Region.create!(nome: "Centro-Oeste")
-Region.create!(nome: "Nordeste")
-Region.create!(nome: "Norte")
+Region.create!(nome: "1ª Região Fiscal")
+Region.create!(nome: "2ª Região Fiscal")
+Region.create!(nome: "3ª Região Fiscal")
+Region.create!(nome: "4ª Região Fiscal")
+Region.create!(nome: "5ª Região Fiscal")
+Region.create!(nome: "6ª Região Fiscal")
+Region.create!(nome: "7ª Região Fiscal")
+Region.create!(nome: "8ª Região Fiscal")
+Region.create!(nome: "9ª Região Fiscal")
+Region.create!(nome: "10ª Região Fiscal")
 
 puts "Creating indicators..."
 usr1_id = User.first.id
+
 Objective.all.each do |objective|
+  case objective.nome
+  when "Aproximar a arrecadação efetiva da potencial"
+    nome = 'Índice de Realização da Meta Global de Arrecadação Bruta'
+  when "Aumentar a satisfação dos contribuintes com a Receita Federal"
+    nome = "Indíce de satisfação dos contribuintes com a Receita Federal"
+  when "Intensificar a oferta de serviços por meio digital"
+    nome = "Índice de novos serviços disponibilizados em plataformas virtuais"
+  when "Agilizar a análise de demandas requeridas à Receita Federal"
+    nome = "Idade média dos pedidos de restituição, ressarcimento e reembolso"
+  when "Otimizar o desenvolvimento do corpo funcional"
+    nome = "Índice de amplitude de capacitação e desenvolvimento"
+  end
+
+  puts "Nome: " + nome
+
   tipo_meta_max = %i[true true true false].sample
-  indicator = Indicator.create!(nome: "Índice de #{objective.nome}",
-                                sigla: "i#{objective.nome.split.map(&:first).join}",
-                                finalidade: "indicar percentual de #{objective.nome}",
-                                abrangencia: "nacional",
-                                unidade_de_medida: [nil, '%'].sample,
+  indicator = Indicator.create!(nome: nome,
+                                sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
+                                abrangencia: "Nacional",
+                                unidade_de_medida: ['unidade', 'percentual', 'percentual', 'percentual'].sample,
                                 qtd_apuracoes_ano: [2, 4, 12].sample,
-                                qtd_metas_ano: rand(1..2),
+                                qtd_metas_ano: [1, 4].sample,
                                 user_id: usr1_id,
                                 objective_id: objective.id,
                                 region_id: Region.first.id,
@@ -108,13 +123,12 @@ Objective.all.each do |objective|
   next unless :true == %i[true false].sample
 
   5.times do |i|
-    Indicator.create!(nome: "Índice de #{objective.nome}",
-                      sigla: "i#{objective.nome.split.map(&:first).join}",
-                      finalidade: "indicar percentual de #{objective.nome}",
-                      abrangencia: "regional",
+    Indicator.create!(nome: nome,
+                      sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
+                      abrangencia: "Regional",
                       unidade_de_medida: indicator.unidade_de_medida,
                       qtd_apuracoes_ano: [2, 4, 12].sample,
-                      qtd_metas_ano: rand(1..2),
+                      qtd_metas_ano: [1, 4].sample,
                       user_id: usr1_id,
                       objective_id: objective.id,
                       region_id: (Region.first.id + i + 1),
@@ -151,9 +165,11 @@ end
 
 puts "creating dashboards..."
 User.all.each do |user|
-  Dashboard.create!(nome: "1º Painel de #{user.name}",
+  Dashboard.create!(nome: "Arrecadação",
                     user_id: user.id)
-  Dashboard.create!(nome: "2º Painel de #{user.name}",
+  Dashboard.create!(nome: "Fiscalização",
+                    user_id: user.id)
+  Dashboard.create!(nome: "Atendimento",
                     user_id: user.id)
 end
 
@@ -163,10 +179,10 @@ Dashboard.all.each do |dashboard|
   indicadores.each_with_index do |ind, i|
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
-                nome: ind.nome,
+                nome: ind.nome.slice(0..49),
                 destaque: :null,
                 ordem: i + 1,
-                tipo_grafico: "velocimetro")
+                tipo_grafico: "Rosca")
   end
 end
 

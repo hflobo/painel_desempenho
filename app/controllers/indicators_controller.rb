@@ -52,6 +52,6 @@ class IndicatorsController < ApplicationController
   private
 
   def indicator_params
-    params.require(:indicator).permit(:nome, :sigla, :finalidade, :abrangencia, :unidade_de_medida, :qtd_apuracoes_ano, :qtd_metas_ano, :region_id, :objective_id)
+    params.require(:indicator).permit(:nome, :sigla, :abrangencia, :unidade_de_medida, :qtd_apuracoes_ano, :qtd_metas_ano, :region_id, :objective_id)
   end
 end

@@ -1,5 +1,5 @@
-<div class="container w-50">
-  <h1 class="text-center">Indicadores</h1>
+<div class="container">
+  <h3>Indicadores</h3>
   <div class='notifications'>
     <% @indicators.each do |indicator| %>
       <div class="notification">
@@ -9,12 +9,12 @@
           <small><%= name %></small>
           <% indicator.objective.nome %>
           <br>
-          <%= indicator.finalidade %>
-          <br>
           <%= indicator.abrangencia %>
         </div>
         <div class="notification-actions">
-          <a><%= link_to "Ver indicador", indicator_path(indicator, "1"), class: "a-primary", data: {turbolinks: 'false'} %>
+          <a><%= link_to "Ver com linhas", indicator_path(indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} %>
+          <i class="fas fa-chart-line"></i></a>
+          <a><%= link_to "Ver com barras", indicator_path(indicator, graf: "barra"), class: "a-primary", data: {turbolinks: 'false'} %>
           <i class="fas fa-chart-bar"></i></a>
           <a><%= link_to "Criar alerta", new_alert_path(id: indicator), class: "a-primary" %>
           <i class="fas fa-bell"></i></a>

@@ -9,20 +9,17 @@ module GraphicsHelper
                 defer: true, colors: ['#045762', 'rgb(175, 12, 12)'],
                 plot_options: {
                   radial_bar: {
-                    start_angle:-135,
+                    start_angle: -135,
                     end_angle: 135,
-                    data_labels: { show: true, total: { show: false, label: kpi.indicator.sigla},
-                      name: { show: true },
-                      value: { show: true }
-                    }
+                    data_labels: { show: true, total: { show: false, label: kpi.indicator.sigla },
+                                   name: { show: true },
+                                   value: { show: true } }
                   }
-                }
-              }
+                } }
 
     radial_bar_chart([
-      { name: "apurado", data: kpi.indicator.values.last.valor * 100 },
-      { name: "meta", data: kpi.indicator.goals.last.valor * 100 }
-      ], options
-      )
+                       { name: "apurado", data: kpi.indicator.percent_meta[:valor] * 100.round(2) },
+                       { name: "meta", data: kpi.indicator.percent_meta[:meta] * 100.round(2) }
+                     ], options)
   end
 end

@@ -7,9 +7,9 @@
         <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>
           <div class="dashboard-card">
             <div class="dashboard-card-content" >
-              <h3><%= kpi.indicator.values.last.valor %></h3>
+              <h3><%= kpi.indicator.percent_meta[:valor] * 100 %></h3>
               <p> <%= "#{kpi.indicator.sigla}: #{kpi.nome}" %> </p>
-              Meta: <%= kpi.indicator.goals.last.valor %>
+              Meta: <%= kpi.indicator.percent_meta[:meta] * 100 %>
             </div>
             <%= render_graphic kpi %>
           </div>

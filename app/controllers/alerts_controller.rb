@@ -93,7 +93,7 @@ class AlertsController < ApplicationController
 
   def set_alert
     @alert = Alert.find(params[:id])
-    @indicator = Indicator.find(@alert.indicator_id).includes(:region)
+    @indicator = Indicator.find(@alert.indicator_id)
     if User.find(@alert.criador_id) == current_user
       @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
     else
