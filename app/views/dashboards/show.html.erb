@@ -29,11 +29,25 @@
               </div>
             </div>
 
-            <div class="d-flex justify-content-center align-items-center">
-              <div class="mx-2"><h3><%= "#{kpi.indicator.percent_meta[:valor]}" %></h3></div>
-              <div class="mx-2"><h4>Meta: <%= " #{kpi.indicator.percent_meta[:meta]} - #{kpi.indicator.percent_meta[:perc_meta]}"  %></h4></div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mx-2">
+                  <h4><%= kpi.indicator.unidade_de_medida.nil? || kpi.indicator.unidade_de_medida == '' ? '' : "(#{kpi.indicator.unidade_de_medida})" %></h4>
+                </div>
+                <div>
+                  <h3><%= kpi.indicator.percent_meta[:valor] %></h3>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mx-2">
+                  <h4><strong><%= "#{kpi.indicator.percent_meta[:perc_meta]}%" %></strong> da meta:</h4>
+                </div>
+                <div class="mx-2">
+                  <h4><strong><%= kpi.indicator.percent_meta[:meta] %></strong></h4>
+                </div>
+              </div>
             </div>
-            <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome}" %> </h5>
+            <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome} - #{kpi.indicator.region.nome}" %> </h5>
           </div>
           <%= render_graphic kpi %>
         </div>
