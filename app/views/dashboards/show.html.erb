@@ -16,6 +16,7 @@
             <h3><%= kpi.indicator.values.last.valor %></h3>
             <p> <%= "#{kpi.indicator.sigla}: #{kpi.nome}" %> </p>
             <h6>Meta: <%= kpi.indicator.goals.last.valor %></h6>
+
           </div>
           <%= render_graphic kpi %>
         </div>

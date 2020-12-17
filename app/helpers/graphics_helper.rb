@@ -9,7 +9,7 @@ module GraphicsHelper
                 defer: true, colors: ['#045762', 'rgb(175, 12, 12)'],
                 plot_options: {
                   radial_bar: {
-                    start_angle:-135,
+                    start_angle: -135,
                     end_angle: 135,
                     hollow: {
                       margin: 2,
@@ -20,8 +20,7 @@ module GraphicsHelper
                       value: { show: true }
                     }
                   }
-                }
-              }
+                } }
 
     options_line = { chart: { offsetX: -0, offsetY: -0, width: '100%', height: '100%' },
                 legend: { show: true, position: 'top', offsetY: 20 },

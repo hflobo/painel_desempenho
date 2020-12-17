@@ -1,23 +1,21 @@
-<div class="container w-50">
-  <h1 class="text-center">Indicadores</h1>
+<div class="container">
+  <h3>Indicadores</h3>
   <div class='notifications'>
     <% @indicators.each do |indicator| %>
-      <div class="notification">
+      <div class="notification <%= cookies[:theme] %>"">
         <div class="notification-content">
-          <% name = "#{indicator.nome} - #{indicator.abrangencia}" %>
-          <% name = name + ": " + indicator.region.nome if indicator.abrangencia.upcase! == "REGIONAL" %>
-          <small><%= name %></small>
-          <% indicator.objective.nome %>
-          <br>
-          <%= indicator.finalidade %>
-          <br>
-          <%= indicator.abrangencia %>
+          <p><small><%= "#{indicator.nome}"%></small></p>
+          <p><small><%= "#{indicator.abrangencia}" %>
+            <%= indicator.abrangencia.upcase == 'REGIONAL' ? ": #{indicator.region.nome}" : "" %></small></p>
+          <p class="font-size=30px"><%= indicator.objective.nome %></p>
         </div>
         <div class="notification-actions">
-          <a><%= link_to "Ver indicador", indicator_path(indicator), class: "a-primary" %>
+          <a><%= link_to "Ver com linhas", indicator_path(indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} %>
+          <i class="fas fa-chart-line"></i></a>
+          <a><%= link_to "Ver com barras", indicator_path(indicator, graf: "barra"), class: "a-primary", data: {turbolinks: 'false'} %>
           <i class="fas fa-chart-bar"></i></a>
-          <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
-          <i class="fas fa-bell"></i></a>          
+          <a><%= link_to "Criar alerta", new_alert_path(id: indicator), class: "a-primary" %>
+          <i class="fas fa-bell"></i></a>
         </div>
       </div>
     <% end %>

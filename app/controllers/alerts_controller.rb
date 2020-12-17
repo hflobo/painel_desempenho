@@ -10,7 +10,6 @@ class AlertsController < ApplicationController
 
   def new
     @indicator = Indicator.find(params[:id]) unless params[:id].nil?
-
     @alert = Alert.new
     @alerts = Alert.where('criador_id = ? AND arquivado = ?', current_user.id, false).includes(:destinatario)
 
@@ -61,6 +60,7 @@ class AlertsController < ApplicationController
       end
     else
       @alert.data_providencia = Date.today
+      @alert.data_ciencia = Date.today if @alert.data_ciencia.nil?
       if @alert.update(alert_params)
         redirect_to alerts_received_path, notice: 'Providencia informada com sucesso'
       else
