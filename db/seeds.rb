@@ -119,7 +119,7 @@ Objective.all.each do |objective|
   indicator = Indicator.create!(nome: nome,
                                 sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
                                 abrangencia: "Nacional",
-                                unidade_de_medida: ['unidade', 'percentual', 'percentual', 'percentual'].sample,
+                                unidade_de_medida: ['', '%', '%', '%'].sample,
                                 qtd_apuracoes_ano: [2, 4, 12].sample,
                                 qtd_metas_ano: [1, 4].sample,
                                 user_id: usr1_id,
