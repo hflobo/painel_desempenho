@@ -1,11 +1,11 @@
 <div class="container">
     <h3>Edite o valor</h3>
-    <%= render "form", value: @value %>
+    <%= render "values/form", value: @value %>
         <div class="my-4">
           <%= link_to "Excluir", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
         </div>
     <div class="container">
-  <table class="table">
+  <table class="table cores-tb <%= cookies[:theme] %>">
     <thead>
       <tr>
         <th scope="col">Ano</th>
@@ -19,10 +19,10 @@
       <% @values.each do |value| %>
       <tr class="<%= value.indicator_id %>" <% if value.indicator_id != @value.indicator_id %> style='display: none;' <% end %>  >
         <th scope="row"><%= value.ano %></th>
-        <td><%= value.nome_periodo_valor %></td>
+        <td><%= value.nome_periodo_valor(value.indicator.qtd_apuracoes_ano) %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
-        <td><a><%= link_to "Editar", edit_value_path(value), class: "a-primary" %><i class="fas fa-edit"></i></a></td>
+        <td><a><%= link_to "Editar", edit_value_path(value), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
       </tr>
       <% end %>
     </tbody>

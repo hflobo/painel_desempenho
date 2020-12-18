@@ -1,36 +1,57 @@
-<div class="container text-center">
-
   <div class="dashboard <%= cookies[:theme] %>">
-    <h2><%= @dashboard.nome %></h2>
-    <div class="row p-auto m-auto">
-      <!-- <% nova_linha = false %>
-      <% num_cards = 0 %> -->
-      <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>
-       <!--  <% if nova_linha %>
-          <div class="row p-auto m-auto">
-          <% num_cards = 0 %>
+    <div class="m-2">
+      <ul class="nav nav-tabs <%= cookies[:theme] %>">
+        <% current_user.dashboards.each do |dashboard| %>
+          <li class="nav-item <%= cookies[:theme] %>">
+            <%= link_to dashboard.nome, dashboard_path(dashboard.id), class: "nav-link #{dashboard.id == @dashboard.id ? 'active' : ''}", data: {turbolinks: 'false'} %>
+          </li>
         <% end %>
-        <% kpi.destaque ? num_cards += 2 : num_cards += 1 %> -->
+        <li class="nav-item <%= cookies[:theme] %>">
+          <%= link_to 'Novo Painel', new_dashboard_path, class: "nav-link" %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="row p-auto m-auto">
+      <% @dashboard.kpis.order(ordem: :asc).each do |kpi| %>
         <div class="dashboard-card <%= kpi.destaque ? 'dashboard-card-double ' : 'dashboard-card-single '%> <%=cookies[:theme] %>">
+
           <div class="dashboard-card-content <%= cookies[:theme] %>" >
-            <h3><%= kpi.indicator.values.last.valor %></h3>
-            <p> <%= "#{kpi.indicator.sigla}: #{kpi.nome}" %> </p>
-            <h6>Meta: <%= kpi.indicator.goals.last.valor %></h6>
+            <div class="d-flex justify-content-between">
+              <div></div>
+              <div class="dashboard-nome">
+                <h4><%= kpi.nome %></h4>
+              </div>
+              <div>
+                <%= link_to edit_dashboard_kpi_path @dashboard, kpi do %>
+                  <i class="fas fa-ellipsis-v"></i>
+                <% end %>
+              </div>
+            </div>
 
-
-
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mx-2">
+                  <h4><%= kpi.indicator.unidade_de_medida.nil? || kpi.indicator.unidade_de_medida == '' ? '' : "(#{kpi.indicator.unidade_de_medida})" %></h4>
+                </div>
+                <div>
+                  <h3><%= kpi.indicator.percent_meta[:valor] %></h3>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="mx-2">
+                  <h4><strong><%= "#{kpi.indicator.percent_meta[:perc_meta]}%" %></strong> da meta:</h4>
+                </div>
+                <div class="mx-2">
+                  <h4><strong><%= kpi.indicator.percent_meta[:meta] %></strong></h4>
+                </div>
+              </div>
+            </div>
+            <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome} - #{kpi.indicator.region.nome}" %> </h5>
           </div>
           <%= render_graphic kpi %>
         </div>
-       <!--   <% num_cards >= 4 ? nova_linha = true : nova_linha = false %>
-        <% if nova_linha %>
-          </div>
-
-        <% end %> -->
       <% end %>
-      <!-- <% if nova_linha %>
-        <div class="row p-auto m-auto">
-      <% end %> -->
         <div class="dashboard-card dashboard-card-single dashboard-plus d-flex justify-content-around align-items-center <%= cookies[:theme] %>">
 
           <%= link_to new_dashboard_kpi_path @dashboard do%>
@@ -39,4 +60,3 @@
         </div>
     </div>
   </div>
-</div>

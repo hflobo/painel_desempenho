@@ -4,7 +4,7 @@ module GraphicsHelper
     #             "meta restante": (kpi.indicator.goals.last.valor * 100 - kpi.indicator.values.last.valor * 100) }),
     #             donut: true, download: true, legend: true, defer: true, colors: ['#045762', 'rgb(175, 12, 12)'], width: '250px', height: '250px'
 
-    options_circle = { chart: { offsetX: -0, offsetY: -0, width: '100%', height: '100%' },
+    options_circle = { chart: { offsetX: -0, offsetY: -0, width: '100%', height: '90%' },
                 legend: { show: true, position: 'top', offsetY: 20 },
                 defer: true, colors: ['#045762', 'rgb(175, 12, 12)'],
                 plot_options: {
@@ -22,22 +22,26 @@ module GraphicsHelper
                   }
                 } }
 
-    options_line = { chart: { offsetX: -0, offsetY: -0, width: '100%', height: '100%' },
+    options_line = { chart: { offsetX: -0, offsetY: -0, width: '100%', height: '70%' },
                 legend: { show: true, position: 'top', offsetY: 20 },
                 defer: true, colors: ['#045762', 'rgb(175, 12, 12)'],
               }
 
     if kpi.tipo_grafico == "circular"
       return radial_bar_chart([
-        { name: "apurado", data: kpi.indicator.values.last.valor * 100 },
+        { name: "indicador", data: kpi.indicator.values.last.valor * 100 },
         { name: "meta", data: kpi.indicator.goals.last.valor * 100 }
         ], options_circle
         )
     elsif kpi.tipo_grafico == "linha"
-      return line_chart(kpi.indicator.param_graph(true,2017,2020), options_line)
+      ano_atual = Date.today.year
+      x_array = kpi.indicator.param_graph(2, ano_atual - 2, ano_atual)
+      return line_chart(x_array, options_line)
 
     elsif kpi.tipo_grafico == "barra"
-      return column_chart(kpi.indicator.param_graph(true,2017,2020), options_line)
+      ano_atual = Date.today.year
+      x_array = kpi.indicator.param_graph(2, ano_atual - 2, ano_atual)
+      return column_chart(x_array, options_line)
     end
 
   end

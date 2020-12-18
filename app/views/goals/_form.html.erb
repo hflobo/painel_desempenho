@@ -1,0 +1,11 @@
+<%= simple_form_for(@goal) do |f| %>
+  <div class="form-inputs">
+    <% if !@indicator %>
+      <%= f.input :indicator_id, label_method: :name_of_method, label: "Indicador", goal_method: :id, collection: @indicators %>
+    <% end %>
+    <%= f.input :ano, label: "Ano: " %>
+    <%= f.input :periodo, label: "Período: " %>
+    <%= f.input :valor, label: "Valor: " %>
+  </div>
+  <%= f.submit "#{@goal.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
+<% end %>

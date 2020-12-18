@@ -1,0 +1,18 @@
+<%= simple_form_for [ @dashboard, @kpi ] do |f| %>
+
+
+    <div class="form-inputs">
+      <%= f.input :indicator_id, label_method: lambda { |indicator| "#{indicator.id}: #{indicator.sigla} - #{indicator.nome} - #{indicator.region.nome}" }, collection: @indicators, label: "Indicador" %>
+      <%= f.input :nome %>
+      <%= f.input :tipo_grafico, collection: ["circular", "linha", "barra"] %>
+      <%= f.input :destaque %>
+      <%= f.input :ordem, input_html: { value: @kpi.ordem.nil? ? @dashboard.kpis.last.ordem + 1 : @kpi.ordem }%>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
+    <div class="my-4">
+      <%= link_to 'Voltar', dashboard_path(@dashboard.id), class: "btn btn-primary", data: {turbolinks: 'false'} %>
+    </div>
+  <% end %>

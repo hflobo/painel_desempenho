@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+  </div>
+  <table class="table cores-tb <%= cookies[:theme] %>">
+    <thead>
+      <tr>
+        <th scope="col">Ano</th>
+        <th scope="col">Período</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Indicador</th>
+        <th scope="col">Ações</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @goals.each do |goal| %>
+      <tr>
+        <th scope="row"><%= goal.nome_periodo_valor %></th>
+        <td><%= goal.ano %></td>
+        <td><%= goal.valor %></td>
+        <td><%= goal.indicator.nome %></td>
+        <td><a><%= link_to "Ver", goal_path(goal), class: "tab-link" %><i class="fas fa-search-plus"></i></a></td>
+        <td><a><%= link_to "Editar", edit_goal_path(goal), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
+        <td><a><%= link_to "Excluir", goal_path(goal), method: :delete, data: { confirm: "Você tem certeza?" }, class: "tab-link" %><i class="fas fa-trash-alt"></i></a></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="my-4">
+    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+  </div>
+</div>

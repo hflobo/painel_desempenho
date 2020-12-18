@@ -1,8 +1,6 @@
 <div class="container">
-
-  <h3>Cadastre novo valor</h3>
-  <%= render "values/form", value: @value %>
-
+  <h3>Cadastre nova meta</h3>
+  <%= render "form", goal: @goal %>
   <div class="my-4">
   <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
   </div>
@@ -19,13 +17,13 @@
         </tr>
       </thead>
       <tbody>
-        <% @values.each do |value| %>
-        <tr class="<%= value.indicator_id %>">
-          <th scope="row"><%= value.ano %></th>
-          <td><%= value.nome_periodo_valor(value.indicator.qtd_apuracoes_ano) %></td>
-          <td><%= value.valor %></td>
-          <td><%= value.indicator.nome %></td>
-          <td><a><%= link_to "Editar", edit_value_path(value), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
+        <% @goals.each do |goal| %>
+        <tr class="<%= goal.indicator_id %>">
+          <th scope="row"><%= goal.ano %></th>
+          <td><%= goal.nome_periodo_valor %></td>
+          <td><%= goal.valor %></td>
+          <td><%= goal.indicator.nome %></td>
+          <td><a><%= link_to "Editar", edit_goal_path(goal), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
         </tr>
         <% end %>
       </tbody>

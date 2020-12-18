@@ -1,43 +1,27 @@
 .dashboard {
-  //display: grid;
-  //grid-template-columns: 1fr 1fr 1fr 1fr;
-  //grid-template-rows: 50% 50%;
-  width: 1240px;
-  // margin-top: 20px;
+  width: 1600px;
   margin: 20px auto;
 }
-// .dashboard .main {
-//   grid-row: 1 / span 2;
-//   grid-column: 1 / span 1;
-// }
-// .dashboard .description {
-//   grid-row: 2 / span 1;
-//   grid-column: span 2;
-// }
-
 
 .dashboard-card {
   background: #fafbfe;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
   padding: 10px;
-  margin: 10px;
+  margin: 0 10px;
   text-align: center;
-  border-radius: 4px;
-}
-
-.dashboard-card-single {
-  width: 280px;
-  height: 400px;
   background-clip: border-box;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   margin-bottom: 24px;
 }
 
-.dashboard-card-double {
-  width: 580px;
+.dashboard-card-single {
+  width: 380px;
   height: 400px;
-  //grid-row: 2 / span 1;
-  //grid-column: span 2;
+}
+
+.dashboard-card-double {
+  width: 780px;
+  height: 400px;
 }
 
 .dashboard-card-content {
@@ -45,6 +29,11 @@
   padding: 4px;
   margin: 4px;
   text-align: center;
+}
+
+.dashboard-nome {
+  height: 40px;
+  margin: 0 2px;
 }
 
 .dashboard-plus {
@@ -78,15 +67,33 @@
 
 /* Fonts and colors */
 .dashboard h2 {
-  font-size: 30px;
+  font-size: 28px;
   color: $my-green;
+  margin-bottom: 16px;
 }
 .dashboard h3 {
   color: $my-green;
-  font-size: 25px;
-  margin-bottom: 15px;
+  font-size: 24px;
+  margin-bottom: 8px;
 }
 
+.dashboard h4 {
+  color: $my-green;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.dashboard h5 {
+  color: $my-green;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.dashboard h6 {
+  color: $my-green;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
 
 .dashboard p.dark {
   color: #8391a2!important;
@@ -101,6 +108,7 @@
 .dashboard img {
   border-radius: 50%;
 }
+
 .dashboard .btn {
   border-radius: 5px;
   border: none;
@@ -117,32 +125,3 @@
   opacity: 0.7;
 }
 
-// .main p {
-//   margin-bottom: 30px;
-// }
-
-// body {
-//  margin: 0;
-//  font-family: 'Nunito sans', sans-serif;
-//  font-size: 18px;
-//  font-weight: 300;
-//  background-color:#e6e0e0;
-//
-// }
-// p {
-//  font-weight: lighter;
-// }
-// h1, h2, h3 {
-//   font-family: 'Montserrat', sans-serif;
-//   font-weight: bold;
-// }
-// h1 {
-//   font-size: 30px;
-// }
-// h2 {
-//   font-size: 25px;
-//   margin-bottom: 20px;
-// }
-// h3 {
-//   font-size: 23px;
-// }
