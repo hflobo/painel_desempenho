@@ -149,20 +149,23 @@ end
 puts "Creating goals..."
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
-    val = rand(3.5..6.00)
+    val = rand(indicator.valor_maximo * 0.8..indicator.valor_maximo)
     puts val
     indicator.qtd_metas_ano.times do |i|
       Goal.create!(ano: ano,
                    periodo: i + 1,
-                   valor: rand * indicator.valor_maximo,
+                   valor: val,
                    indicator_id: indicator.id)
     end
   end
 end
 
 puts "Creating values..."
+
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
+    val = rand(indicator.valor_maximo * 0.7..indicator.valor_maximo * 1.1)
+    puts val
     indicator.qtd_apuracoes_ano.times do |i|
       Value.create!(ano: ano,
                     periodo: i + 1,
