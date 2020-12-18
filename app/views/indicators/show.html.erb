@@ -23,7 +23,7 @@
             <% end %>
             <a><%= link_to "Editar", edit_indicator_path(@indicator), class: "a-primary" %>
             <i class="far fa-edit"></i></a>
-            <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
+            <a><%= link_to "Criar alerta", new_alert_path(id: @indicator), class: "a-primary" %>
             <i class="fas fa-bell"></i></a>
         </div>
     </div>
@@ -36,9 +36,9 @@
     <% anoatual = Date.today.year %>
     <% xarray = @indicator.param_graph(2, anoatual - 2, anoatual) %>
     <% if params[:graf] == "linha" %>
-      <%= line_chart xarray, defer: true %>
+      <%= line_chart xarray, defer: true, colors: ['#045762', 'rgb(175, 12, 12)'] %>
     <% else %>
-      <%= column_chart xarray, defer: true %>
+      <%= column_chart xarray, defer: true, colors: ['#045762', 'rgb(175, 12, 12)'] %>
     <% end %>
     <br>
     <div class='notifications'>

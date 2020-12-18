@@ -6,13 +6,13 @@
       <%= f.input :nome %>
       <%= f.input :tipo_grafico, collection: ["circular", "linha", "barra"] %>
       <%= f.input :destaque %>
-      <%= f.input :ordem, input_html: { value: @kpi.ordem.nil? ? @dashboard.kpis.last.ordem + 1 : @kpi.ordem }%>
+      <%= f.input :ordem, input_html: { value: @kpi.ordem.nil? ? @dashboard.kpis.length + 1 : @kpi.ordem }%>
     </div>
 
     <div class="form-actions">
       <%= f.submit "#{@kpi.id ? 'Alterar' : 'Criar'}", class: "btn btn-success" %>
     </div>
     <div class="my-4">
-      <%= link_to 'Voltar', dashboard_path(@dashboard.id), class: "btn btn-primary" %>
-    </div> 
+      <%= link_to 'Voltar', dashboard_path(@dashboard.id), class: "btn btn-primary", data: {turbolinks: 'false'} %>
+    </div>
   <% end %>

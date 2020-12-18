@@ -9,11 +9,19 @@
       <td>
         <p>Painel de Desempenho Institucional</p>
       </td>
-      <td>
+      <td style="padding: 16px;">
+        <!--<div class="custom-control custom-switch mx-5">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1">
+          <label class="custom-control-label" for="customSwitch1">Modo Escuro</label>
+        </div> -->
         <% if cookies[:theme] == "light" %>
-          <%= link_to "  (Modo escuro)", root_path(theme: "dark"), data: {turbolinks: "false"} %>
+          modo escuro<%= link_to root_path(theme: "dark"), class:"", data: {turbolinks: "false"} do %>
+            <i class="fas fa-toggle-off fa-1x mx-2"> Off</i>
+          <% end %>
         <% else %>
-          <%= link_to "  (Modo claro)", root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} %>
+          modo escuro<%= link_to root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} do %>
+            <i class="fas fa-toggle-on fa-1x mx-2"> On</i>
+          <% end %>
         <% end %>
       </td>
     </tr>
@@ -48,9 +56,9 @@
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="dropdown-toggle n-link" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-chart-line"></i> Indicadores</span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Listar todos", indicators_path, class: "nav-link" %> 
+            <%= link_to "Listar todos", indicators_path, class: "nav-link" %>
             <%= link_to "Criar", new_indicator_path, class: "nav-link" %>
-            <%= link_to "Listar valores", values_path, class: "nav-link" %> 
+            <%= link_to "Listar valores", values_path, class: "nav-link" %>
             <%= link_to "Informar valores", new_value_path, class: "nav-link" %>
             <%= link_to "Listar Metas", goals_path, class: "nav-link" %>
             <%= link_to "Informar metas", new_goal_path, class: "nav-link" %>
