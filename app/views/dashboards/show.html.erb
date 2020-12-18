@@ -20,7 +20,7 @@
             <div class="d-flex justify-content-between">
               <div></div>
               <div class="dashboard-nome">
-                <h4><%= kpi.nome %></h4>
+                <h4><%= kpi.nome.upcase %></h4>
               </div>
               <div>
                 <%= link_to edit_dashboard_kpi_path @dashboard, kpi do %>
@@ -47,7 +47,9 @@
                 </div>
               </div>
             </div>
-            <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome} - #{kpi.indicator.region.nome}" %> </h5>
+            <%= link_to indicator_path(kpi.indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} do %>
+              <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome} - #{kpi.indicator.region.nome}" %> </h5>
+            <% end %>
           </div>
           <%= render_graphic kpi %>
         </div>
