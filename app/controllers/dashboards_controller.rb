@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
 
   def show
     @dashboards = policy_scope(Dashboard).order(nome: :asc)
-    if params[:id].nil?
+    if params[:id].nil? || params[:id] == "0"
       @dashboard = @dashboards.first
     else
       @dashboard = @dashboards.find(params[:id])

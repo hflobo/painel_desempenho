@@ -2,7 +2,7 @@
     <table>
     <tr>
       <td>
-        <%= link_to "/", class: "navbar-brand", data: {turbolinks: "false"} do %>
+        <%= link_to dashboard_path(0), class: "navbar-brand", data: {turbolinks: "false"} do %>
           <%= image_tag "logo_receita.jpg" %>
         <% end %>
       </td>
@@ -15,12 +15,12 @@
           <label class="custom-control-label" for="customSwitch1">Modo Escuro</label>
         </div> -->
         <% if cookies[:theme] == "light" %>
-          modo escuro<%= link_to root_path(theme: "dark"), class:"", data: {turbolinks: "false"} do %>
-            <i class="fas fa-toggle-off fa-1x mx-2"> Off</i>
+          <%= link_to root_path(theme: "dark"), class:"", data: {turbolinks: "false"} do %>
+            <i class="fas fa-toggle-off fa-1x mx-2"> escuro</i>
           <% end %>
         <% else %>
-          modo escuro<%= link_to root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} do %>
-            <i class="fas fa-toggle-on fa-1x mx-2"> On</i>
+          <%= link_to root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} do %>
+            <i class="fas fa-toggle-on fa-1x mx-2"> claro</i>
           <% end %>
         <% end %>
       </td>
