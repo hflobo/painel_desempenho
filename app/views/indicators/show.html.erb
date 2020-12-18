@@ -29,16 +29,16 @@
     </div>
   </div>
   <div class="my-4">
-    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+    <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %>
   </div>
   <hr>
   <div class='container w-300'>
     <% anoatual = Date.today.year %>
     <% xarray = @indicator.param_graph(2, anoatual - 2, anoatual) %>
     <% if params[:graf] == "linha" %>
-      <%= line_chart xarray, defer: true %>
+      <%= line_chart xarray, defer: true, colors: ['#045762', 'rgb(175, 12, 12)'] %>
     <% else %>
-      <%= column_chart xarray, defer: true %>
+      <%= column_chart xarray, defer: true, colors: ['#045762', 'rgb(175, 12, 12)'] %>
     <% end %>
     <br>
     <div class='notifications'>

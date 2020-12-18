@@ -47,7 +47,9 @@
                 </div>
               </div>
             </div>
-            <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome} - #{kpi.indicator.region.nome}" %> </h5>
+            <%= link_to indicator_path(kpi.indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} do %>
+              <h5> <%= "#{kpi.indicator.sigla}: #{kpi.indicator.nome} - #{kpi.indicator.region.nome}" %> </h5>
+            <% end %>
           </div>
           <%= render_graphic kpi %>
         </div>

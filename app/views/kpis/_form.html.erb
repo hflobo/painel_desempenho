@@ -6,7 +6,7 @@
       <%= f.input :nome %>
       <%= f.input :tipo_grafico, collection: ["circular", "linha", "barra"] %>
       <%= f.input :destaque %>
-      <%= f.input :ordem, input_html: { value: @kpi.ordem.nil? ? @dashboard.kpis.last.ordem + 1 : @kpi.ordem }%>
+      <%= f.input :ordem, input_html: { value: @kpi.ordem.nil? ? @dashboard.kpis.length + 1 : @kpi.ordem }%>
     </div>
 
     <div class="form-actions">

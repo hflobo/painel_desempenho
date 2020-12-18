@@ -14,12 +14,16 @@ class KpisController < ApplicationController
   def create
     @kpi = Kpi.new(kpi_params)
     @kpi.dashboard_id = params[:dashboard_id]
+    @kpi.dashboard = Dashboard.find(params[:dashboard_id])
 
     authorize(@kpi)
-    if @kpi.save
-      @kpi.reordenar!
+
+    if @kpi.valid?
+      @kpi.reordenar!(@kpi.id, @kpi.ordem, @kpi.dashboard.kpis.length)
+      @kpi.save
       redirect_to dashboard_path(@kpi.dashboard_id)
     else
+      @dashboard = @kpi.dashboard
       render :new
     end
   end
@@ -31,8 +35,11 @@ class KpisController < ApplicationController
   end
 
   def update
-    if @kpi.update(kpi_params)
-      @kpi.reordenar!
+    ordem_velha = @kpi.ordem
+    @kpi.ordem = kpi_params[:ordem]
+    if @kpi.valid?
+      @kpi.reordenar!(@kpi.id, @kpi.ordem.to_i, ordem_velha)
+      @kpi.update(kpi_params)
       redirect_to dashboard_path(@kpi.dashboard_id)
     else
       @dashboard = @kpi.dashboard
@@ -42,7 +49,9 @@ class KpisController < ApplicationController
 
   def destroy
     dashboard_id = @kpi.dashboard_id
-    if @kpi.destroy
+    if @kpi.valid?
+      @kpi.reordenar!(@kpi.id, @kpi.dashboard.kpis.length, @kpi.ordem)
+      @kpi.destroy
       redirect_to dashboard_path(dashboard_id)
     end
   end
