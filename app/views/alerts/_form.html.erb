@@ -16,7 +16,7 @@
       <% end %>
       <%= f.input :descricao, label: 'Alerta' %>
       <%= f.input :destinatario_id, label: 'Destinatário', collection: @users %>
-      <%= f.input :providencia, label: 'Requer providência.' %>
+      <%= f.input :providencia, label: 'Requer providência' %>
     </div>
     <div class="form-actions">
       <%= f.submit "#{@alert.id ? 'Alterar' : 'Criar'}", class: "btn btn-success" %>

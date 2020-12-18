@@ -2,7 +2,8 @@
     <h3>Edite o valor</h3>
     <%= render "values/form", value: @value %>
         <div class="my-4">
-          <%= link_to "Excluir", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
+          <%= link_to "Excluir", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-info" %>
+          <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %> 
         </div>
     <div class="container">
   <table class="table cores-tb <%= cookies[:theme] %>">

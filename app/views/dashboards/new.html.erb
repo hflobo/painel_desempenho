@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="form">
+    <h3>Crie um painel</h3>
+    <p style="font-size:18px">Você só precisa dar um nome para o seu painel. Ao clicar no botão <strong>Criar</strong> será gerado um
+       painel com alguns indicadores que você poderá alterar como quiser.
+       Para apagar um painel existente, passe o ponteiro sobre a barra com o nome do painel logo abaixo e clique no ícone <strong>Apagar</strong>.</p>
+    <br>
+    <%= render 'form', alert: (@dashboard)%>
+    <div class="my-4">
+      <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %>
+    </div>
+  </div>
+  <hr>
+  <h3>Painéis existentes</h3>
+  <div class='notifications'>
+    <% @dashboards.each do |dashboard| %>
+      <div class="notification <%= cookies[:theme] %>">
+        <div class="notification-content">
+          <p><small><%= dashboard.nome %></small></p>
+        </div>
+        <div class="notification-actions">
+          <a><%= link_to 'Apagar', dashboard, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
+            <i class="far fa-trash-alt"></i></a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+</div>

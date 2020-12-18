@@ -6,7 +6,6 @@ class KpisController < ApplicationController
     @kpi = Kpi.new
     @indicators = Indicator.all.order(id: :asc)
     @dashboard = Dashboard.find(params[:dashboard_id])
-    # @kpi.indicator = @indicator
     @kpi.dashboard = @dashboard
     authorize(@kpi)
   end

@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+    <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %>
   </div>
   <br>
   <table class="table cores-tb <%= cookies[:theme] %>">
@@ -30,6 +30,6 @@
     </tbody>
   </table>
   <div class="my-4">
-    <%= link_to 'Voltar', :back, class: "btn btn-primary"%>
+    <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %>
   </div>
 </div>
