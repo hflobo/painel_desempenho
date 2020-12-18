@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+// require(“../../../vendor/assets/dist/js/dsgov”)
 
 // Chartkick: biblioteca para geração de gráficos
 // require("chartkick")

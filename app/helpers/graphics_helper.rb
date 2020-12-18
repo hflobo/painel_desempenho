@@ -4,7 +4,7 @@ module GraphicsHelper
     #             "meta restante": (kpi.indicator.goals.last.valor * 100 - kpi.indicator.values.last.valor * 100) }),
     #             donut: true, download: true, legend: true, defer: true, colors: ['#045762', 'rgb(175, 12, 12)'], width: '250px', height: '250px'
 
-    options_circle = { chart: { offsetX: -0, offsetY: -0, width: '100%', height: '90%' },
+    options_circle = { chart: { offsetX: -0, offsetY: -16, width: '100%', height: '90%' },
                        legend: { show: true, position: 'top', offsetY: 20 },
                        defer: true, colors: ['#045762', 'rgb(175, 12, 12)'],
                        plot_options: {

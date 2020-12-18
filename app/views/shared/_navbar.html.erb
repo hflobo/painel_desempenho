@@ -2,7 +2,7 @@
     <table>
     <tr>
       <td>
-        <%= link_to "/", class: "navbar-brand", data: {turbolinks: "false"} do %>
+        <%= link_to dashboard_path(0), class: "navbar-brand", data: {turbolinks: "false"} do %>
           <%= image_tag "logo_receita.jpg" %>
         <% end %>
       </td>
@@ -15,12 +15,12 @@
           <label class="custom-control-label" for="customSwitch1">Modo Escuro</label>
         </div> -->
         <% if cookies[:theme] == "light" %>
-          modo escuro<%= link_to root_path(theme: "dark"), class:"", data: {turbolinks: "false"} do %>
-            <i class="fas fa-toggle-off fa-1x mx-2"> Off</i>
+          <%= link_to root_path(theme: "dark"), class:"", data: {turbolinks: "false"} do %>
+            <i class="fas fa-toggle-off fa-1x mx-2"> escuro</i>
           <% end %>
         <% else %>
-          modo escuro<%= link_to root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} do %>
-            <i class="fas fa-toggle-on fa-1x mx-2"> On</i>
+          <%= link_to root_path(theme: "light"), class:"text-muted", data: {turbolinks: "false"} do %>
+            <i class="fas fa-toggle-on fa-1x mx-2"> claro</i>
           <% end %>
         <% end %>
       </td>
@@ -36,7 +36,8 @@
         <li class="nav-item dropdown">
           <span style="margin:10px;" class="dropdown-toggle n-link" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-chart-bar"></i> Painéis</span>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Criar / Excluir", new_dashboard_path, class: "dropdown-item" %>
+            <%= link_to "Criar", new_dashboard_path, class: "dropdown-item" %>
+            <%= link_to "Editar", edit_dashboard_path("0"), class: "dropdown-item" %>
             <hr>
             <% @dashboards = Dashboard.where('user_id = ?', current_user.id) %>
             <% @dashboards.each do |dashboard| %>

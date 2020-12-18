@@ -5,9 +5,29 @@ class DashboardsController < ApplicationController
     @dashboards = policy_scope(Dashboard).order(nome: :asc)
   end
 
+  def edit
+    @dashboards = Dashboard.where('user_id = ?', current_user.id)
+    if params[:id].nil? || params[:id] == "0"
+      @dashboard = @dashboards.first
+    else
+      @dashboard = @dashboards.find(params[:id])
+    end
+    authorize(@dashboard)
+  end
+
+  def update
+    @dashboard = Dashboard.find(params[:id])
+    if @dashboard.update(dashboard_params)
+      redirect_to dashboard_path(@dashboard.id), notice: 'Nome do Painel alterado com sucesso'
+    else
+      render :edit
+    end
+    authorize @dashboard
+  end
+
   def show
     @dashboards = policy_scope(Dashboard).order(nome: :asc)
-    if params[:id].nil?
+    if params[:id].nil? || params[:id] == "0"
       @dashboard = @dashboards.first
     else
       @dashboard = @dashboards.find(params[:id])
@@ -40,21 +60,20 @@ class DashboardsController < ApplicationController
       redirect_to dashboard_path(@dashboard.id), notice: 'Dashboard criado com sucesso'
     else
       raise
-       @dashboards = Dashboard.where('user_id = ?', current_user.id)
-       render :new
+      @dashboards = Dashboard.where('user_id = ?', current_user.id)
+      render :new
     end
     authorize @dashboard
   end
-  
+
   def destroy
     @dashboard = Dashboard.find(params[:id])
     authorize @dashboard
     @dashboard.destroy
-    redirect_to new_dashboard_path, notice: 'Dashboard excluído com sucesso'
+    redirect_to edit_dashboard_path("0"), notice: 'Dashboard excluído com sucesso'
   end
 
   def dashboard_params
     params.require(:dashboard).permit(:nome)
   end
-
 end
