@@ -23,7 +23,7 @@
             <% end %>
             <a><%= link_to "Editar", edit_indicator_path(@indicator), class: "a-primary" %>
             <i class="far fa-edit"></i></a>
-            <a><%= link_to "Criar alerta", new_alert_path(@alert), class: "a-primary" %>
+            <a><%= link_to "Criar alerta", new_alert_path(id: @indicator), class: "a-primary" %>
             <i class="fas fa-bell"></i></a>
         </div>
     </div>

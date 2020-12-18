@@ -20,7 +20,7 @@
             <div class="d-flex justify-content-between">
               <div></div>
               <div class="dashboard-nome">
-                <h4><%= kpi.nome %></h4>
+                <h4><%= kpi.nome.upcase %></h4>
               </div>
               <div>
                 <%= link_to edit_dashboard_kpi_path @dashboard, kpi do %>
