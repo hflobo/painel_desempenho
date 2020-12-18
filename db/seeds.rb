@@ -164,12 +164,12 @@ puts "Creating values..."
 
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
-    val = rand(indicator.valor_maximo * 0.7..indicator.valor_maximo * 1.1)
+    val = rand(indicator.valor_maximo * 0.7..indicator.valor_maximo * 1.2)
     puts val
     indicator.qtd_apuracoes_ano.times do |i|
       Value.create!(ano: ano,
                     periodo: i + 1,
-                    valor: rand * indicator.valor_maximo,
+                    valor: val,
                     indicator_id: indicator.id)
     end
   end
@@ -187,12 +187,12 @@ end
 
 puts "creating kpis..."
 Dashboard.all.each do |dashboard|
-  indicadores = Indicator.all.sample(5)
+  indicadores = Indicator.all.sample(6)
   indicadores.each_with_index do |ind, i|
     tipo = ["circular", "circular", "circular", "circular", "linha", "barra"].sample
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
-                nome: ind.nome[0..49],
+                nome: ind.nome[0..39],
                 destaque: tipo != "circular",
                 ordem: i + 1,
                 tipo_grafico: tipo)
