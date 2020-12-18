@@ -2,7 +2,8 @@
     <h3>Edite o valor da meta</h3>
     <%= render "form", goal: @goal %>
         <div class="my-4">
-          <%= link_to "Excluir", goal_path(@goal), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-primary" %> 
+          <%= link_to "Excluir", goal_path(@goal), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-info" %> 
+          <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %>
         </div>
     <div class="container">
   <table class="table cores-tb <%= cookies[:theme] %>">

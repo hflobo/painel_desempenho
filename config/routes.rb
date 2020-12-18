@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :indicators do
- # get 'indicators_index', to: 'indicators#index'
- # get 'new_indicator', to: 'indicator#new'
     resources :kpi
   end
   resources :values

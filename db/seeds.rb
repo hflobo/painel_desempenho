@@ -190,7 +190,7 @@ Dashboard.all.each do |dashboard|
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
                 nome: ind.nome[0..49],
-                destaque: !(tipo == "circular"),
+                destaque: tipo != "circular",
                 ordem: i + 1,
                 tipo_grafico: tipo)
   end
