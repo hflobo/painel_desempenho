@@ -12,6 +12,7 @@
 @import "components/index";
 @import "pages/index";
 @import "components/notification";
+// @import "css/dsgov.min";
 
 body.dark {
   color: rgb(255, 255, 255);
@@ -28,6 +29,10 @@ body {
   color: rgb(131, 143, 156); 
   text-align: left;
  
+}
+
+a{
+  color:rgb(131, 143, 156); 
 }
 
 
