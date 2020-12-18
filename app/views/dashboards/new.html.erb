@@ -16,14 +16,17 @@
     <% @dashboards.each do |dashboard| %>
       <div class="notification <%= cookies[:theme] %>">
         <div class="notification-content">
-          <p><small><%= dashboard.nome %></small></p>
+          <%= link_to dashboard_path(dashboard.id), data: {turbolinks: 'false'} do %>
+            <p><small><%= dashboard.nome %></small></p>
+          <% end %>
         </div>
         <div class="notification-actions">
-          <a><%= link_to 'Apagar', dashboard, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
-            <i class="far fa-trash-alt"></i></a>
+          <%= link_to dashboard, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" do %>
+            <i class="far fa-trash-alt fa-2x"></i>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
-  
+
 </div>
