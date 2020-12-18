@@ -35,10 +35,14 @@ class KpisController < ApplicationController
 
   def update
     ordem_velha = @kpi.ordem
+    @kpi.indicator_id = kpi_params[:indicator_id]
     @kpi.ordem = kpi_params[:ordem]
+    @kpi.nome = kpi_params[:nome]
+    @kpi.tipo_grafico = kpi_params[:tipo_grafico]
+    @kpi.destaque = kpi_params[:destaque]
     if @kpi.valid?
       @kpi.reordenar!(@kpi.id, @kpi.ordem.to_i, ordem_velha)
-      @kpi.update(kpi_params)
+      @kpi.update!(kpi_params)
       redirect_to dashboard_path(@kpi.dashboard_id)
     else
       @dashboard = @kpi.dashboard
