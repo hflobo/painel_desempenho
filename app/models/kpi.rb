@@ -3,7 +3,8 @@ class Kpi < ApplicationRecord
   belongs_to :dashboard
 
   validates :nome, :ordem, :tipo_grafico, presence: true
-  validates :nome, length: { maximum: 45 }
+  validates :nome, length: { maximum: 45
+   }
   validates :ordem, numericality: { only_integer: true,
     less_than_or_equal_to: ->(kpi) {kpi.dashboard.kpis.length + (kpi.new_record? ? 1 : 0)} }
 
