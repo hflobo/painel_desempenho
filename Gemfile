@@ -40,7 +40,8 @@ gem 'faker'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
-group :development, :test do  gem 'pry-byebug'
+group :development, :test do
+  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
 
@@ -70,9 +71,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Salvar fotos
 gem 'cloudinary', '~> 1.16.0'
-
-gem 'dotenv-rails', groups: [:development, :test]
-
 
 # Biblioteca para gerar gráficos nas páginas
 # gem 'chartkick'

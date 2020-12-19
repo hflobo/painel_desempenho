@@ -114,14 +114,17 @@ Objective.all.each do |objective|
   end
 
   puts "Nome: " + nome
+  apuracoes = [2, 4, 12].sample
+  metas = [1, 2, 4].sample
+  metas /= 2 if metas > apuracoes
 
   tipo_meta_max = %i[true true true false].sample
   indicator = Indicator.create!(nome: nome,
                                 sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
                                 abrangencia: "Nacional",
                                 unidade_de_medida: ['', '%', '%', '%'].sample,
-                                qtd_apuracoes_ano: [2, 4, 12].sample,
-                                qtd_metas_ano: [1, 4].sample,
+                                qtd_apuracoes_ano: apuracoes,
+                                qtd_metas_ano: metas,
                                 user_id: usr1_id,
                                 objective_id: objective.id,
                                 region_id: Region.first.id,
@@ -149,13 +152,13 @@ end
 puts "Creating goals..."
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
-    val = rand(indicator.valor_maximo * 0.8..indicator.valor_maximo)
-    puts val
     indicator.qtd_metas_ano.times do |i|
+      val = rand(indicator.valor_maximo * 0.8..indicator.valor_maximo)
+      puts val
       Goal.create!(ano: ano,
-                   periodo: i + 1,
-                   valor: val,
-                   indicator_id: indicator.id)
+                  periodo: i + 1,
+                  valor: val,
+                  indicator_id: indicator.id)
     end
   end
 end
@@ -164,13 +167,13 @@ puts "Creating values..."
 
 Indicator.all.each do |indicator|
   (2017..2020).to_a.each do |ano|
-    val = rand(indicator.valor_maximo * 0.7..indicator.valor_maximo * 1.2)
-    puts val
     indicator.qtd_apuracoes_ano.times do |i|
-      Value.create!(ano: ano,
-                    periodo: i + 1,
-                    valor: val,
-                    indicator_id: indicator.id)
+    val = rand(indicator.valor_maximo * 0.8..indicator.valor_maximo * 1.1)
+    puts val
+    Value.create!(ano: ano,
+                  periodo: i + 1,
+                  valor: val,
+                  indicator_id: indicator.id)
     end
   end
 end
@@ -188,14 +191,33 @@ end
 puts "creating kpis..."
 Dashboard.all.each do |dashboard|
   indicadores = Indicator.all.sample(6)
+  d = 0
+  j = 1
   indicadores.each_with_index do |ind, i|
-    tipo = ["circular", "circular", "circular", "circular", "linha", "barra"].sample
+    tipo = ["circular", "circular", "linha", "barra"].sample
+    if tipo == "circular"
+      if (j == 3 && d == 0) || (j == 6 && d == 1)
+        destaque = true
+        tipo = "linha"
+        d += 1
+      else
+        destaque = false
+      end
+    else
+      if ( d == 0 && j < 4 ) || ( d == 1 && j > 3)
+        destaque = true
+        d += 1
+      else
+        destaque = false
+      end
+    end
     Kpi.create!(dashboard_id: dashboard.id,
                 indicator_id: ind.id,
                 nome: ind.nome[0..39],
-                destaque: tipo != "circular",
-                ordem: i + 1,
+                destaque: destaque,
+                ordem: j,
                 tipo_grafico: tipo)
+    j += 1
   end
 end
 
