@@ -23,7 +23,7 @@ class ValuesController < ApplicationController
     authorize @value
 #    @value.user_id = current_user.id
     if @value.save!
-      redirect_to values_path(@value), notice: "Valor foi cadastrado com sucesso"
+      redirect_to new_value_path(@value), notice: "Valor foi cadastrado com sucesso"
     else
       render :new
     end
