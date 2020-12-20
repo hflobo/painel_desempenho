@@ -238,3 +238,4 @@ User.where(admin: true).each do |user|
 end
 
 puts "Ok. time to see the dashboards!"
+
