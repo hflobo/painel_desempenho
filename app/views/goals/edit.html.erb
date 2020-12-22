@@ -2,7 +2,6 @@
     <h3>Edite o valor da meta</h3>
     <%= render "form", goal: @goal %>
         <div class="my-4">
-          <%= link_to "Excluir", goal_path(@goal), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-info" %> 
           <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %>
         </div>
     <div class="container">
@@ -23,7 +22,14 @@
         <td><%= goal.nome_periodo_valor(goal.indicator.qtd_apuracoes_ano) %></td>
         <td><%= goal.valor %></td>
         <td><%= goal.indicator.nome %></td>
-        <td><a><%= link_to "Editar", edit_goal_path(goal), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
+        <td>
+          <%= link_to edit_goal_path(goal), class: "a-primary", title: "Editar" do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link_to goal, method: :delete, title: "Excluir", data: { confirm: 'Tem certeza que quer excluir?' }, class: "a-primary" do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     </tbody>

@@ -7,7 +7,12 @@
       <%= f.input :nome, label: 'Nome do Painel' %>
     </div>
     <div class="form-actions">
-      <%= f.submit "#{@dashboard.id ? 'Alterar' : 'Criar'}", class: "btn btn-success" %>
+      <% if @dashboard.id %>
+        <%= f.submit 'Alterar', class: "btn btn-success" %>
+        <%= link_to 'Excluir', @dashboard, method: :delete,  class: "btn btn-info", data: { confirm: 'Tem certeza de que deseja excluir o painel?' } %>
+      <% else %>
+        <%= f.submit 'Criar', class: "btn btn-success" %>
+      <% end %>
     </div>
   <% end %>
 </div>

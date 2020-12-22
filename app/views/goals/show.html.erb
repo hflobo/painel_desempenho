@@ -4,7 +4,7 @@
       <div class="notification">
         <div class="notification-content">
           <p>Ano: <small><%= @goal.ano %></small></p>
-          <p>Período: <small><%= @goal.nome_periodo_valor(goal.indicator.qtd_apuracoes_ano) %></small></p>
+          <p>Período: <small><%= @goal.nome_periodo_valor(@goal.indicator.qtd_apuracoes_ano) %></small></p>
           <p>Valor: <small><%= @goal.valor %></small></p>
         </div>
         <div class="notification-actions">

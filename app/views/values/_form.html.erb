@@ -7,5 +7,10 @@
     <%= f.input :periodo, label: "Período: " %>
     <%= f.input :valor, label: "Valor: " %>
   </div>
-  <%= f.submit "#{@value.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
+  <% if @value.id %>
+        <%= f.submit 'Alterar', class: "btn btn-success" %>
+        <%= link_to 'Excluir', @value, method: :delete,  class: "btn btn-info", data: { confirm: 'Tem certeza que quer excluir?' } %>
+      <% else %>
+        <%= f.submit 'Criar', class: "btn btn-success" %>
+  <% end %>
 <% end %>

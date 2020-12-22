@@ -1,12 +1,7 @@
 <div class="container">
   <div class="d-flex justify-content-between my-2">
     <div>
-      <h4>Alterar ou apagar gráfico</h4>
-    </div>
-    <div class="mr-5">
-      <%= link_to @kpi, method: :delete, data: { confirm: 'Tem certeza de que deseja excluir o gráfico?' } do%>
-        <i class="fas fa-trash fa-2x"></i>
-      <% end %>
+      <h3>Alterar ou apagar gráfico</h3>
     </div>
   </div>
   <%= render "form", kpi: @kpi %>
