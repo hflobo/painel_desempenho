@@ -25,12 +25,16 @@
 
         <div class="notification-actions">
           <% if alert.data_ciencia %>
-            <a><%= link_to "Arquivar", alert, method: :put, class: "a-primary" %>
-            <i class="fas fa-archive"></i></a>
+            <%= link_to alert, method: :put, class: "a-primary", data: { confirm: 'Tem certeza que quer arquivar?' }, title: "Arquivar" do %>
+              <i class="fas fa-archive fa-2x"></i>
+            <% end %>
           <% else %>
-            <a><%= link_to "Editar", edit_alert_path(alert), class: "a-primary" %><i class="far fa-edit"></i></a>
-            <a><%= link_to 'Apagar', alert, method: :delete, data: { confirm: 'Tem certeza?' }, class: "a-primary" %>
-            <i class="far fa-trash-alt"></i></a>
+            <%= link_to edit_alert_path(alert), class: "a-primary", title: "Editar" do %>
+              <i class="far fa-edit fa-2x"></i>
+            <% end %>
+            <%= link_to alert, method: :delete, title: "Excluir", data: { confirm: 'Tem certeza que quer excluir?' }, class: "a-primary" do %>
+              <i class="far fa-trash-alt fa-2x"></i>
+            <% end %>
           <% end %>
         </div>
       </div>

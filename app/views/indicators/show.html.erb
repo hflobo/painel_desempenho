@@ -5,26 +5,35 @@
         <div class="notification-content">
           <p>Objetivo: <small><%= @indicator.objective.nome %></small></p>
           <p>Sigla: <small><%= @indicator.sigla %></small>  -  Abrangência: <small><%= @indicator.abrangencia %></small>
-          <% if @indicator.abrangencia.upcase == "REGIONAL" %>
-          <small><%= @indicator.region.nome %></small>
-          <% end %>
+            <% if @indicator.abrangencia.upcase == "REGIONAL" %>
+              <small><%= @indicator.region.nome %></small>
+            <% end %>
+            - Unidade de medida: <small><%= @indicator.unidade_de_medida %></small>
           </p>
-          <p>Unidade de medida: <small><%= @indicator.unidade_de_medida %></small> - Apurações por ano: <small>
-            <%= @indicator.qtd_apuracoes_ano %>
-            </small> - Metas por ano: <small><%= @indicator.qtd_metas_ano %></small></p>
+          <p>Apurações por ano: <small><%= @indicator.qtd_apuracoes_ano %>
+            </small> - Metas por ano: <small><%= @indicator.qtd_metas_ano %>
+            </small> (<%= @indicator.tipo_meta_max ? "valor máximo" : "valor mínimo" %>)
+          </p>
         </div>
         <div class="notification-actions">
             <% if params[:graf] == "barra" %>
-              <a><%= link_to "Ver com linhas", indicator_path(@indicator, graf: "linha"), class: "a-primary", data: {turbolinks: 'false'} %>
-              <i class="fas fa-chart-line"></i></a>
+              <%= link_to indicator_path(@indicator, graf: "linha"), title: "Exibir com gráfico de linhas", class: "a-primary", data: {turbolinks: 'false'} do %>
+                <i class="fas fa-chart-line fa-2x"></i>
+              <% end %>
             <% else %>
-              <a><%= link_to "Ver com barras", indicator_path(@indicator, graf: "barra"), class: "a-primary", data: {turbolinks: 'false'} %>
-              <i class="fas fa-chart-bar"></i></a>
+              <%= link_to indicator_path(@indicator, graf: "barra"), title: "Exibir com gráfico de barras", class: "a-primary", data: {turbolinks: 'false'} do %>
+                <i class="fas fa-chart-bar fa-2x"></i>
+              <% end %>
             <% end %>
-            <a><%= link_to "Editar", edit_indicator_path(@indicator), class: "a-primary" %>
-            <i class="far fa-edit"></i></a>
-            <a><%= link_to "Criar alerta", new_alert_path(id: @indicator), class: "a-primary" %>
-            <i class="fas fa-bell"></i></a>
+            <%= link_to edit_indicator_path(@indicator), title: "Editar", class: "a-primary" do %>
+              <i class="far fa-edit fa-2x"></i>
+            <% end %>
+            <%= link_to new_alert_path(id: @indicator), title: "Criar Alerta!", class: "a-primary" do %>
+              <i class="fas fa-bell fa-2x"></i>
+            <% end %>
+            <%= link_to @indicator, method: :delete, title: "Excluir", data: { confirm: 'Tem certeza que quer excluir?' }, class: "a-primary" do %>
+              <i class="far fa-trash-alt fa-2x"></i>
+            <% end %>
         </div>
     </div>
   </div>

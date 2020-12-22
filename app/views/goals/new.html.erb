@@ -8,7 +8,7 @@
   <div class="container">
     <table class="table cores-tb <%= cookies[:theme] %>">
       <thead>
-        <tr>
+        <tr class="titulo">
           <th scope="col">Ano</th>
           <th scope="col">Período</th>
           <th scope="col">Valor</th>
@@ -23,7 +23,14 @@
           <td><%= goal.nome_periodo_valor(goal.indicator.qtd_apuracoes_ano) %></td>
           <td><%= goal.valor %></td>
           <td><%= goal.indicator.nome %></td>
-          <td><a><%= link_to "Editar", edit_goal_path(goal), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
+          <td>
+            <%= link_to edit_goal_path(goal), class: "a-primary", title: "Editar" do %>
+                <i class="far fa-edit"></i>
+            <% end %>
+            <%= link_to goal, method: :delete, title: "Excluir", data: { confirm: 'Tem certeza que quer excluir?' }, class: "a-primary" do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </td>
         </tr>
         <% end %>
       </tbody>

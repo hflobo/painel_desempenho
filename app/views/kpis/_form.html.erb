@@ -10,7 +10,12 @@
     </div>
 
     <div class="form-actions">
-      <%= f.submit "#{@kpi.id ? 'Alterar' : 'Criar'}", class: "btn btn-success" %>
+      <% if @kpi.id %>
+        <%= f.submit 'Alterar', class: "btn btn-success" %>
+        <%= link_to 'Excluir', @kpi, method: :delete,  class: "btn btn-info", data: { confirm: 'Tem certeza de que deseja excluir o gráfico?' } %>
+      <% else %>
+        <%= f.submit 'Criar', class: "btn btn-success" %>
+      <% end %>
     </div>
     <div class="my-4">
       <%= link_to 'Voltar', dashboard_path(@dashboard.id), class: "btn btn-primary", data: {turbolinks: 'false'} %>

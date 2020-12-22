@@ -27,13 +27,15 @@
 
         <div class="notification-actions">
           <% if !alert.data_ciencia %>
-            <a><%= link_to "Confirmar ", alert, method: :put, class: "a-primary" %>
-              <i class="fas fa-business-time"></i></a>
+            <%= link_to alert, title: "Confirmar ciência", method: :put, class: "a-primary" do %>
+              <i class="fas fa-business-time fa-2x"></i>
+            <% end %>
           <% end %>
 
           <% if alert.providencia %>
-            <a><%= link_to 'Providências', edit_alert_path(alert), class: "a-primary" %>
-              <i class="far fa-lightbulb"></i></a>
+            <%= link_to edit_alert_path(alert), title: "Informar providências", class: "a-primary" do %>
+              <i class="far fa-lightbulb fa-2x"></i>
+            <% end %>
           <% end %>
 
         </div>

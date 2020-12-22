@@ -84,7 +84,12 @@ Objective.create!(nome: "Otimizar o desenvolvimento do corpo funcional",
                   tipo: "de Pessoas e Recursos",
                   descricao: "Desenvolver o corpo funcional para aprimorar suas competências para lidar com as demandas do mundo contemporãneo")
 
+Objective.create!(nome: "Ampliar a segurança e agilidade no comércio exterior",
+                  tipo: "Estratégico",
+                  descricao: "Propiciar celeridade no fluxo de importações e exportações, com segurança, combatendo os ilícitos internacionais")
+
 puts "Creating regions..."
+Region.create!(nome: "Brasil")
 Region.create!(nome: "1ª Região Fiscal")
 Region.create!(nome: "2ª Região Fiscal")
 Region.create!(nome: "3ª Região Fiscal")
@@ -103,14 +108,28 @@ Objective.all.each do |objective|
   case objective.nome
   when "Aproximar a arrecadação efetiva da potencial"
     nome = 'Índice de realização da meta global de arrecadação bruta'
+    sigla = "IdAB"
+    unidade = "%"
   when "Aumentar a satisfação dos contribuintes com a Receita Federal"
-    nome = "Indíce de satisfação dos contribuintes com a Receita Federal"
+    nome = "Índice de satisfação dos contribuintes com a Receita Federal"
+    sigla = "IdSC"
+    unidade = "un"
   when "Intensificar a oferta de serviços por meio digital"
     nome = "Índice de novos serviços disponibilizados em plataformas virtuais"
+    sigla = "IdNS"
+    unidade = "%"
   when "Agilizar a análise de demandas requeridas à Receita Federal"
     nome = "Idade média dos pedidos de restituição, ressarcimento e reembolso"
+    sigla = "ImPR"
+    unidade = "m"
   when "Otimizar o desenvolvimento do corpo funcional"
     nome = "Índice de amplitude de capacitação e desenvolvimento"
+    sigla = "IdAC"
+    unidade = "%"
+  when "Ampliar a segurança e agilidade no comércio exterior"
+    nome = "Tempo médio de despacho aduaneiro"
+    sigla = "TmDA"
+    unidade = "h"
   end
 
   puts "Nome: " + nome
@@ -120,9 +139,9 @@ Objective.all.each do |objective|
 
   tipo_meta_max = %i[true true true false].sample
   indicator = Indicator.create!(nome: nome,
-                                sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
+                                sigla: sigla,
                                 abrangencia: "Nacional",
-                                unidade_de_medida: ['', '%', '%', '%'].sample,
+                                unidade_de_medida: unidade,
                                 qtd_apuracoes_ano: apuracoes,
                                 qtd_metas_ano: metas,
                                 user_id: usr1_id,
@@ -133,14 +152,14 @@ Objective.all.each do |objective|
 
   next unless :true == %i[true false].sample
 
-  5.times do |i|
+  10.times do |i|
     Indicator.create!(nome: nome,
-                      sigla: "ID#{objective.nome.split.map(&:first).join.first(2)}",
+                      sigla: sigla,
                       abrangencia: "Regional",
-                      unidade_de_medida: indicator.unidade_de_medida,
+                      unidade_de_medida: unidade,
                       valor_maximo: [1, 100, 1000].sample,
-                      qtd_apuracoes_ano: [2, 4, 12].sample,
-                      qtd_metas_ano: rand(1..2),
+                      qtd_apuracoes_ano: apuracoes,
+                      qtd_metas_ano: metas,
                       user_id: usr1_id,
                       objective_id: objective.id,
                       region_id: (Region.first.id + i + 1),
@@ -238,3 +257,4 @@ User.where(admin: true).each do |user|
 end
 
 puts "Ok. time to see the dashboards!"
+

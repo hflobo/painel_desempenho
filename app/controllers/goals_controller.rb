@@ -1,7 +1,6 @@
 class GoalsController < ApplicationController
-
   before_action :authenticate_user!
-  
+
   def index
     @goals = policy_scope(Goal)
   end
@@ -13,7 +12,7 @@ class GoalsController < ApplicationController
 
   def new
     @indicator = Indicator.find(params[:id]) unless params[:id].nil?
-    @goals = policy_scope(Goal) 
+    @goals = policy_scope(Goal).sort
     @goal = Goal.new
     @indicators = Indicator.all
     authorize @goal
@@ -22,17 +21,17 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     authorize @goal
-#    @goal.user_id = current_user.id
-    if @goal.save!
-      redirect_to goals_path(@goal), notice: "Meta foi cadastrada com sucesso"
+    if @goal.save
+      redirect_to new_goal_path(@goal), notice: "Meta cadastrada com sucesso"
     else
+      @goals = policy_scope(Goal).sort
       render :new
     end
   end
 
   def edit
     @goal = Goal.find(params[:id])
-    @goals = policy_scope(Goal)
+    @goals = policy_scope(Goal).sort
     authorize @goal
     @indicators = Indicator.all
   end
@@ -40,21 +39,28 @@ class GoalsController < ApplicationController
   def update
     @goal = Goal.find(params[:id])
     authorize @goal
-    @goal.update(goal_params)
-    redirect_to goal_path(@goal)
+    if @goal.update(goal_params)
+      redirect_to edit_goal_path(@goal), notice: "Meta alterada com sucesso"
+    else
+      @goals = policy_scope(Goal).sort
+      render :edit
+    end
   end
 
   def destroy
     @goal = Goal.find(params[:id])
     authorize @goal
-    @goal.destroy
-    redirect_to goals_path
+    if @goal.destroy
+      redirect_to edit_goal_path("1"), notice: "Meta excluída com sucesso"
+    else
+      render :edit
+    end
   end
 
   private
 
   def goal_params
-    params.require(:Goal).permit(:ano, :periodo, :valor, :indicator_id)
+    params.require(:goal).permit(:ano, :periodo, :valor, :indicator_id)
   end
 end
 

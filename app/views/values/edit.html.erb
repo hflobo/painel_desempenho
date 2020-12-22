@@ -2,7 +2,6 @@
     <h3>Edite o valor</h3>
     <%= render "values/form", value: @value %>
         <div class="my-4">
-          <%= link_to "Excluir", value_path(@value), method: :delete, data: { confirm: "Você tem certeza?" }, class: "btn btn-info" %>
           <%= link_to 'Voltar', :back, class: "btn btn-primary", data: {turbolinks: 'false'} %> 
         </div>
     <div class="container">
@@ -23,7 +22,14 @@
         <td><%= value.nome_periodo_valor(value.indicator.qtd_apuracoes_ano) %></td>
         <td><%= value.valor %></td>
         <td><%= value.indicator.nome %></td>
-        <td><a><%= link_to "Editar", edit_value_path(value), class: "tab-link" %><i class="fas fa-edit"></i></a></td>
+        <td>
+          <%= link_to edit_value_path(value), class: "a-primary", title: "Editar" do %>
+            <i class="far fa-edit"></i>
+          <% end %>
+          <%= link_to value, method: :delete, title: "Excluir", data: { confirm: 'Tem certeza que quer excluir?' }, class: "a-primary" do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+        </td>
       </tr>
       <% end %>
     </tbody>

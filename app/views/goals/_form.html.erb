@@ -7,5 +7,9 @@
     <%= f.input :periodo, label: "Período: " %>
     <%= f.input :valor, label: "Valor: " %>
   </div>
-  <%= f.submit "#{@goal.id ? 'Alterar' : 'Criar'}", class: "btn btn-success"%>
-<% end %>
+  <% if @goal.id %>
+        <%= f.submit 'Alterar', class: "btn btn-success" %>
+        <%= link_to 'Excluir', @goal, method: :delete,  class: "btn btn-info", data: { confirm: 'Tem certeza que quer excluir?' } %>
+      <% else %>
+        <%= f.submit 'Criar', class: "btn btn-success" %>
+  <% end %><% end %>
